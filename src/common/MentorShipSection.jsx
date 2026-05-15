@@ -1,155 +1,106 @@
-import { motion } from "framer-motion";
-import {
-    CalendarDays,
-    Users,
-    TrendingUp,
-    ShieldCheck,
-    PlayCircle,
-    ArrowRight,
-    Star,
-    MessageSquare,
-} from "lucide-react";
+import React from 'react';
+import { 
+  BarChart3, 
+  TrendingUp, 
+  MessagesSquare, 
+  UserRoundCheck, 
+  Map, 
+  BrainCircuit,
+  Users,
+  Video,
+  Smile,
+  Clock
+} from 'lucide-react';
 
-export default function ChartMentorMentorshipPage() {
-    const mentorshipFeatures = [
-        {
-            icon: TrendingUp,
-            title: "Live Market Sessions",
-            description:
-                "Daily live chart analysis with real market breakdowns and trading psychology guidance.",
-        },
-        {
-            icon: Users,
-            title: "Private Trading Community",
-            description:
-                "Join serious traders in exclusive Telegram and WhatsApp mentorship groups.",
-        },
-        {
-            icon: CalendarDays,
-            title: "Weekly Mentorship Calls",
-            description:
-                "Interactive Q&A sessions and strategy discussions with experienced mentors.",
-        },
-        {
-            icon: ShieldCheck,
-            title: "Premium Strategy Access",
-            description:
-                "Get advanced smart money concepts, price action setups, and risk management systems.",
-        },
-    ];
+const MembershipFeatures = () => {
+  const features = [
+    {
+      icon: <BarChart3 className="w-8 h-8 text-blue-500" />,
+      title: "Daily Market Analysis",
+      desc: "Next day market prediction & analysis"
+    },
+    {
+      icon: <TrendingUp className="w-8 h-8 text-blue-500" />,
+      title: "High Probability Setups",
+      desc: "Best setups with proper entry, SL & Target"
+    },
+    {
+      icon: <MessagesSquare className="w-8 h-8 text-blue-500" />,
+      title: "Live Doubt Sessions",
+      desc: "Regular live sessions for doubt solving"
+    },
+    {
+      icon: <UserRoundCheck className="w-8 h-8 text-blue-500" />,
+      title: "Personal Guidance",
+      desc: "Direct support from me and team"
+    },
+    {
+      icon: <Map className="w-8 h-8 text-blue-500" />,
+      title: "Roadmap & Learning",
+      desc: "Step by step roadmap for consistent growth"
+    },
+    {
+      icon: <BrainCircuit className="w-8 h-8 text-blue-500" />,
+      title: "Mindset & Discipline",
+      desc: "Focus on trader mindset & risk management"
+    }
+  ];
 
-    const testimonials = [
-        {
-            name: "Rahul Mehta",
-            role: "Forex Trader",
-            review:
-                "ChartMentor completely changed my trading discipline and helped me become consistently profitable.",
-        },
-        {
-            name: "Priya Shah",
-            role: "Stock Market Learner",
-            review:
-                "The mentorship calls and community support are incredible. I learned more here than anywhere else.",
-        },
-        {
-            name: "Arjun Patel",
-            role: "Crypto Trader",
-            review:
-                "Professional guidance, powerful strategies, and a very active trading community.",
-        },
-    ];
+  const stats = [
+    { icon: <Users className="w-6 h-6" />, value: "5000+", label: "Happy Members" },
+    { icon: <Video className="w-6 h-6" />, value: "200+", label: "Live Sessions" },
+    { icon: <Smile className="w-6 h-6" />, value: "95%", label: "Satisfaction Rate" },
+    { icon: <Clock className="w-6 h-6" />, value: "2+ Years", label: "Of Experience" }
+  ];
 
-    return (
-        <main id="mentorship" className="relative overflow-hidden bg-[#050816] text-white">
-            {/* Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(6,182,212,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_30%)]" />
-            {/* Features */}
-            <section className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10">
-                <div className="mx-auto max-w-3xl text-center">
-                    <h2 className="text-4xl font-black sm:text-5xl lg:text-6xl">
-                        Why Traders Choose
-                        <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                            {" "}
-                            ChartMentor
-                        </span>
-                    </h2>
+  return (
+    <section className="bg-[#030712] py-20 px-6 text-white">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <p className="text-blue-500 uppercase tracking-[0.2em] text-xs font-bold mb-4">
+            KYU CHOOSE KARE
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold">
+            Chart Mentor Membership?
+          </h2>
+        </div>
 
-                    <p className="mt-6 text-lg leading-8 text-slate-400">
-                        Everything you need to grow from beginner to professional trader.
-                    </p>
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-12">
+          {features.map((item, index) => (
+            <div 
+              key={index} 
+              className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-300 hover:bg-white/[0.06] hover:border-blue-500/50 hover:-translate-y-1 group"
+            >
+              <div className="mb-6 p-3 rounded-xl bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">
+                {item.icon}
+              </div>
+              <h3 className="text-lg font-bold mb-3 leading-tight">{item.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats Bar */}
+        <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 md:p-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="flex items-center justify-center gap-4 group">
+                <div className="p-3 rounded-full bg-blue-600/10 text-blue-400 group-hover:scale-110 transition-transform">
+                  {stat.icon}
                 </div>
-
-                <div className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
-                    {mentorshipFeatures.map((feature, index) => {
-                        const Icon = feature.icon;
-
-                        return (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: index * 0.08 }}
-                                viewport={{ once: true }}
-                                className="rounded-[28px] border border-white/10 bg-white/5 p-7 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/30 hover:bg-cyan-400/5"
-                            >
-                                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/20 to-blue-600/20">
-                                    <Icon className="h-8 w-8 text-cyan-400" />
-                                </div>
-
-                                <h3 className="text-xl font-bold">{feature.title}</h3>
-
-                                <p className="mt-4 text-sm leading-7 text-slate-400">
-                                    {feature.description}
-                                </p>
-                            </motion.div>
-                        );
-                    })}
+                <div>
+                  <h4 className="text-2xl md:text-3xl font-black text-white">{stat.value}</h4>
+                  <p className="text-gray-400 text-xs md:text-sm font-medium">{stat.label}</p>
                 </div>
-            </section>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-            {/* Testimonials */}
-            <section className="relative mx-auto max-w-7xl px-6 pb-24 lg:px-10">
-                <div className="mx-auto max-w-3xl text-center">
-                    <h2 className="text-4xl font-black sm:text-5xl">
-                        What Our Members Say
-                    </h2>
-
-                    <p className="mt-6 text-lg leading-8 text-slate-400">
-                        Thousands of traders trust ChartMentor for professional mentorship.
-                    </p>
-                </div>
-
-                <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
-                    {testimonials.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                            className="rounded-[32px] border border-white/10 bg-white/5 p-8 backdrop-blur-xl"
-                        >
-                            <div className="mb-5 flex gap-1">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star
-                                        key={i}
-                                        className="h-5 w-5 fill-cyan-400 text-cyan-400"
-                                    />
-                                ))}
-                            </div>
-
-                            <p className="text-sm leading-8 text-slate-300">
-                                “{item.review}”
-                            </p>
-
-                            <div className="mt-8">
-                                <h4 className="text-lg font-bold">{item.name}</h4>
-                                <p className="text-sm text-slate-400">{item.role}</p>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </section>
-        </main>
-    );
-}
+export default MembershipFeatures;

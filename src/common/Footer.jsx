@@ -1,199 +1,270 @@
-export function ChartMentorFooter() {
-    return (
-        <footer className="relative overflow-hidden border-t border-white/10 bg-[#050816] text-white">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.12),transparent_30%)]" />
+import React from "react";
+import {
+  FaInstagram,
+  FaYoutube,
+  FaTwitter,
+  FaTelegramPlane,
+  FaEnvelope,
+  FaPhoneAlt,
+  FaArrowRight,
+} from "react-icons/fa";
 
-            <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 lg:grid-cols-4 lg:px-10">
-                {/* Brand */}
-                <div>
-                    <div className="mb-5 flex items-center gap-3">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 shadow-lg shadow-cyan-500/20">
-                            <span className="text-xl font-black text-white">C</span>
-                        </div>
+import laptopBg from "../assets/Laptop.jpg";
 
-                        <div>
-                            <h2 className="text-2xl font-black tracking-tight">
-                                Chart<span className="text-cyan-400">Mentor</span>
-                            </h2>
-                            <p className="text-xs text-slate-400">
-                                Learn Trading Professionally
-                            </p>
-                        </div>
-                    </div>
+const socialLinks = [
+  {
+    icon: FaInstagram,
+    link: "https://instagram.com",
+  },
+  {
+    icon: FaYoutube,
+    link: "https://youtube.com",
+  },
+  {
+    icon: FaTwitter,
+    link: "https://twitter.com",
+  },
+  {
+    icon: FaTelegramPlane,
+    link: "https://telegram.org",
+  },
+];
 
-                    <p className="max-w-sm text-sm leading-7 text-slate-400">
-                        Premium trading mentorship platform with live market learning,
-                        private communities, strategy sharing, and advanced educational
-                        resources for modern traders.
-                    </p>
-                </div>
+const quickLinks = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Membership", path: "/membership" },
+  { name: "Testimonials", path: "/testimonials" },
+  { name: "FAQ", path: "/faq" },
+  { name: "Contact", path: "/contact" },
+];
 
-                {/* Navigation */}
-                <div>
-                    <h3 className="mb-5 text-lg font-semibold text-white">Navigation</h3>
+const legalLinks = [
+  { name: "Privacy Policy", path: "/privacy-policy" },
+  { name: "Terms & Conditions", path: "/terms" },
+  { name: "Refund Policy", path: "/refund-policy" },
+];
 
-                    <ul className="space-y-3 text-sm text-slate-400">
-                        <li>
-                            <a href="#" className="transition hover:text-cyan-400">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="transition hover:text-cyan-400">
-                                Features
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="transition hover:text-cyan-400">
-                                Pricing
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="transition hover:text-cyan-400">
-                                Mentorship
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+export default function Footer() {
+  return (
+    <footer className="relative overflow-hidden bg-[#030712] text-white">
+      {/* Background Glow */}
+      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-blue-600/10 blur-[140px]" />
+      <div className="absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-indigo-600/10 blur-[120px]" />
 
-                {/* Community */}
-                <div>
-                    <h3 className="mb-5 text-lg font-semibold text-white">Community</h3>
+      {/* CTA SECTION */}
+      <div className="relative z-20 mx-auto max-w-7xl px-5 pt-20 lg:px-10">
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl">
 
-                    <ul className="space-y-3 text-sm text-slate-400">
-                        <li>
-                            <a href="#" className="transition hover:text-cyan-400">
-                                Telegram Access
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="transition hover:text-cyan-400">
-                                WhatsApp Group
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="transition hover:text-cyan-400">
-                                Discord Server
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="transition hover:text-cyan-400">
-                                Trading Support
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img
+              src={laptopBg}
+              alt="Trading Setup"
+              className="h-full w-full object-cover object-center opacity-20 lg:opacity-40"
+            />
 
-                {/* Newsletter */}
-                <div>
-                    <h3 className="mb-5 text-lg font-semibold text-white">
-                        Join Newsletter
-                    </h3>
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#030712] via-[#030712]/90 to-[#030712]/30" />
+          </div>
 
-                    <p className="mb-5 text-sm leading-6 text-slate-400">
-                        Get premium trading insights, market updates, and mentorship news.
-                    </p>
+          {/* Content */}
+          <div className="relative z-10 flex flex-col gap-10 px-6 py-14 md:px-12 lg:flex-row lg:items-center lg:justify-between lg:px-16 lg:py-20">
+            
+            {/* Left */}
+            <div className="max-w-2xl">
+              <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-blue-400">
+                AB AAPKI BAARI HAI
+              </p>
 
-                    <div className="flex flex-col gap-3">
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-400"
-                        />
+              <h2 className="text-3xl font-black leading-tight sm:text-5xl lg:text-6xl">
+                Akele Mat Seekho.
+                <br />
+                <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                  Sahi Guidance Ke Saath
+                </span>
+                <br />
+                Fast Grow Karo.
+              </h2>
 
-                        <button className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-cyan-500/40">
-                            Subscribe Now
-                        </button>
-                    </div>
-                </div>
+              <p className="mt-6 max-w-xl text-sm leading-relaxed text-gray-300 sm:text-base">
+                Join India’s fast growing trading mentorship community and
+                learn professional trading with real guidance and live support.
+              </p>
             </div>
 
-            {/* Bottom */}
-            <div className="relative border-t border-white/10">
-                <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-6 text-sm text-slate-500 lg:flex-row lg:px-10">
-                    <p>© 2026 ChartMentor. All rights reserved.</p>
-
-                    <div className="flex items-center gap-6">
-                        <a href="#" className="transition hover:text-cyan-400">
-                            Privacy Policy
-                        </a>
-                        <a href="#" className="transition hover:text-cyan-400">
-                            Terms of Service
-                        </a>
-                        <a href="#" className="transition hover:text-cyan-400">
-                            Contact
-                        </a>
-                    </div>
-                </div>
+            {/* Right Button */}
+            <div className="flex lg:justify-end">
+              <a
+                href="/membership"
+                className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.35)]"
+              >
+                JOIN NOW
+                <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
             </div>
-        </footer>
-    );
-}
+          </div>
+        </div>
+      </div>
 
-export default function ChartMentorHeader() {
-    const navLinks = [
-        "Home",
-        "Features",
-        "Pricing",
-        "Mentorship",
-        "Community",
-        "Contact",
-    ];
+      {/* MAIN FOOTER */}
+      <div className="relative z-10 mx-auto mt-24 max-w-7xl px-5 pb-10 lg:px-10">
+        <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
 
-    return (
-        <header className="w-full border-b border-white/10 bg-[#050816]/95 backdrop-blur-xl sticky top-0 z-50">
-            <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-                {/* Logo */}
-                <div className="flex items-center gap-3 cursor-pointer">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 shadow-lg shadow-cyan-500/20">
-                        <span className="text-xl font-black text-white">C</span>
-                    </div>
+          {/* Brand */}
+          <div>
+            <div className="mb-6">
+              <h2 className="text-3xl font-black uppercase tracking-tight">
+                CHART
+              </h2>
 
-                    <div className="leading-tight">
-                        <h1 className="text-2xl font-black tracking-tight text-white">
-                            Chart<span className="text-cyan-400">Mentor</span>
-                        </h1>
-                        <p className="text-xs text-slate-400">
-                            Trading • Learning • Community
-                        </p>
-                    </div>
+              <div className="mt-1 flex items-center gap-2">
+                <div className="h-[2px] w-5 bg-blue-500" />
+
+                <span className="text-xs font-bold uppercase tracking-[0.4em] text-gray-400">
+                  MENTOR
+                </span>
+
+                <div className="h-[2px] w-5 bg-blue-500" />
+              </div>
+            </div>
+
+            <p className="max-w-sm text-sm leading-relaxed text-gray-400">
+              Helping traders learn, grow, and become consistently profitable
+              with professional mentorship and community support.
+            </p>
+
+            {/* Social */}
+            <div className="mt-8 flex flex-wrap gap-4">
+              {socialLinks.map((social, i) => {
+                const Icon = social.icon;
+
+                return (
+                  <a
+                    key={i}
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-gray-300 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:bg-blue-600 hover:text-white"
+                  >
+                    <Icon className="text-lg" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="mb-6 text-sm font-black uppercase tracking-[0.3em] text-white">
+              Quick Links
+            </h3>
+
+            <ul className="space-y-4">
+              {quickLinks.map((link, i) => (
+                <li key={i}>
+                  <a
+                    href={link.path}
+                    className="group inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-all duration-300 hover:text-blue-400"
+                  >
+                    <span className="h-[2px] w-0 bg-blue-500 transition-all duration-300 group-hover:w-4" />
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="mb-6 text-sm font-black uppercase tracking-[0.3em] text-white">
+              Legal
+            </h3>
+
+            <ul className="space-y-4">
+              {legalLinks.map((link, i) => (
+                <li key={i}>
+                  <a
+                    href={link.path}
+                    className="group inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-all duration-300 hover:text-blue-400"
+                  >
+                    <span className="h-[2px] w-0 bg-blue-500 transition-all duration-300 group-hover:w-4" />
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="mb-6 text-sm font-black uppercase tracking-[0.3em] text-white">
+              Contact
+            </h3>
+
+            <div className="space-y-5">
+              <a
+                href="mailto:hello@chartmentor.in"
+                className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:border-blue-500/20 hover:bg-white/[0.05]"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600/10 text-blue-400">
+                  <FaEnvelope />
                 </div>
 
-                {/* Right Side Navigation */}
-                <nav className="hidden items-center gap-8 lg:flex">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link}
-                            href="#"
-                            className="relative text-sm font-medium text-slate-300 transition-all duration-300 hover:text-cyan-400"
-                        >
-                            {link}
-                        </a>
-                    ))}
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-gray-500">
+                    Email
+                  </p>
 
-                    <button className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/40">
-                        Join Membership
-                    </button>
-                </nav>
+                  <p className="text-sm font-medium text-gray-300">
+                    hello@chartmentor.in
+                  </p>
+                </div>
+              </a>
 
-                {/* Mobile Menu Button */}
-                <button className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white lg:hidden">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="h-6 w-6"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5"
-                        />
-                    </svg>
-                </button>
+              <a
+                href="tel:+911234567890"
+                className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:border-blue-500/20 hover:bg-white/[0.05]"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600/10 text-blue-400">
+                  <FaPhoneAlt />
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-gray-500">
+                    Phone
+                  </p>
+
+                  <p className="text-sm font-medium text-gray-300">
+                    +91 12345 67890
+                  </p>
+                </div>
+              </a>
             </div>
-        </header>
-    );
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="mt-16 flex flex-col items-center justify-between gap-5 rounded-2xl border border-white/5 bg-white/[0.02] px-6 py-5 text-center sm:flex-row">
+          <p className="text-xs tracking-wide text-gray-500">
+            © 2026 Chart Mentor. All Rights Reserved.
+          </p>
+
+          <div className="flex items-center gap-5 text-xs text-gray-500">
+            <a href="/privacy-policy" className="hover:text-blue-400">
+              Privacy
+            </a>
+
+            <a href="/terms" className="hover:text-blue-400">
+              Terms
+            </a>
+
+            <a href="/refund-policy" className="hover:text-blue-400">
+              Refund
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

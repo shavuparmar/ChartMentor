@@ -1,194 +1,182 @@
-import { motion } from "framer-motion";
+import React from "react";
 import {
-    ArrowRight,
-    Play,
-    TrendingUp,
-    ShieldCheck,
-    Users,
-    BarChart3,
+  ArrowRight,
+  Play,
+  BarChart3,
+  Users,
+  BadgeCheck,
+  TrendingUp,
 } from "lucide-react";
 
-export default function ChartMentorHero() {
-    return (
-        <section id="home" className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
-            {/* Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(6,182,212,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.16),transparent_28%)]" />
+import heroBg from "../assets/Chartheroback.png";
 
-            <div className="absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
+const features = [
+  {
+    icon: BarChart3,
+    title: "Daily Analysis",
+    desc: "Professional market insights & trading breakdowns everyday.",
+  },
+  {
+    icon: Users,
+    title: "Live Doubt Sessions",
+    desc: "Direct mentor support with live trading discussions.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Personal Guidance",
+    desc: "Step-by-step learning roadmap for consistent growth.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Proven Results",
+    desc: "Build discipline, confidence & trading consistency.",
+  },
+];
 
-            {/* Grid */}
-            <div className="relative mx-auto grid min-h-screen max-w-7xl grid-cols-1 items-center gap-20 px-6 py-24 lg:grid-cols-2 lg:px-10">
-                {/* Left Content */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    {/* Badge */}
-                    <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-5 py-2 text-sm font-medium text-cyan-300 backdrop-blur-md">
-                        <span className="h-2 w-2 rounded-full bg-cyan-400" />
-                        India’s Premium Trading Mentorship Platform
-                    </div>
+export default function HeroSection() {
+  return (
+    <section
+      id="home"
+      className="relative overflow-hidden bg-[#030712] text-white"
+    >
+      {/* ================= BACKGROUND ================= */}
+      <div className="absolute inset-0">
+        {/* IMAGE */}
+        <img
+          src={heroBg}
+          alt="Trading Background"
+          className="h-full w-full object-cover object-center lg:object-right"
+        />
 
-                    {/* Heading */}
-                    <h1 className="max-w-3xl text-5xl font-black leading-tight tracking-tight sm:text-6xl lg:text-7xl">
-                        Learn Smart Trading
-                        <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                            {" "}
-                            With Experts
-                        </span>
-                    </h1>
+        {/* DARK OVERLAY */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#030712] via-[#030712]/90 to-[#030712]/30 lg:via-[#030712]/75 lg:to-transparent" />
 
-                    {/* Description */}
-                    <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-400 sm:text-xl">
-                        Join ChartMentor and unlock advanced market strategies, live chart
-                        analysis, private trading communities, mentorship sessions, and
-                        professional guidance built for serious traders.
-                    </p>
+        {/* EXTRA DEPTH */}
+        <div className="absolute inset-0 bg-black/30" />
 
-                    {/* Buttons */}
-                    <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                        <button className="group flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 text-base font-semibold text-white shadow-2xl shadow-cyan-500/30 transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50">
-                            Join Membership
-                            <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                        </button>
+        {/* MOBILE OVERLAY */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/30 to-transparent lg:hidden" />
+      </div>
 
-                        <button className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-cyan-400/40 hover:bg-cyan-400/10">
-                            <Play className="h-5 w-5" />
-                            Watch Demo
-                        </button>
-                    </div>
+      {/* ================= GLOW EFFECTS ================= */}
+      <div className="absolute left-[-120px] top-[-120px] h-[350px] w-[350px] rounded-full bg-blue-600/10 blur-[120px]" />
 
-                    {/* Stats */}
-                    <div className="mt-16 grid grid-cols-2 gap-6 sm:grid-cols-4">
-                        <div>
-                            <h3 className="text-3xl font-black text-white">25K+</h3>
-                            <p className="mt-2 text-sm text-slate-400">Members</p>
-                        </div>
+      <div className="absolute bottom-[-100px] right-[-100px] h-[280px] w-[280px] rounded-full bg-cyan-500/10 blur-[120px]" />
 
-                        <div>
-                            <h3 className="text-3xl font-black text-white">98%</h3>
-                            <p className="mt-2 text-sm text-slate-400">Success Rate</p>
-                        </div>
+      {/* ================= HERO CONTENT ================= */}
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-5 pb-24 pt-32 sm:pt-36 lg:px-10 lg:pb-20">
+        <div className="max-w-3xl">
+          {/* BADGE */}
+          <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.25em] text-blue-300 backdrop-blur-xl sm:px-5 sm:text-xs">
+            <span className="h-2 w-2 rounded-full bg-blue-400 shadow-[0_0_15px_rgba(96,165,250,0.8)]" />
 
-                        <div>
-                            <h3 className="text-3xl font-black text-white">24/7</h3>
-                            <p className="mt-2 text-sm text-slate-400">Support</p>
-                        </div>
+            India’s Fast Growing Trading Community
+          </div>
 
-                        <div>
-                            <h3 className="text-3xl font-black text-white">150+</h3>
-                            <p className="mt-2 text-sm text-slate-400">Strategies</p>
-                        </div>
-                    </div>
-                </motion.div>
+          {/* HEADING */}
+          <h1 className="mt-7 text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+            Learn Trading
 
-                {/* Right Side UI */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8 }}
-                    className="relative flex items-center justify-center"
-                >
-                    {/* Main Card */}
-                    <div className="relative w-full max-w-2xl overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-2xl">
-                        {/* Top */}
-                        <div className="mb-6 flex items-center justify-between">
-                            <div>
-                                <h3 className="text-2xl font-bold text-white">
-                                    Live Market Dashboard
-                                </h3>
-                                <p className="mt-1 text-sm text-slate-400">
-                                    Real-time trading mentorship insights
-                                </p>
-                            </div>
+            <span className="mt-2 block bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+              Like a Professional
+            </span>
+          </h1>
 
-                            <div className="rounded-xl bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-400">
-                                Market Live
-                            </div>
-                        </div>
+          {/* DESCRIPTION */}
+          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-gray-300 sm:text-base md:text-lg lg:text-xl">
+            Master price action, trading psychology, risk management, and
+            advanced trading strategies with live mentorship, real market
+            sessions, and practical learning from experienced traders.
+          </p>
 
-                        {/* Chart Area */}
-                        <div className="relative h-[360px] overflow-hidden rounded-3xl border border-white/10 bg-[#0b1023] p-6">
-                            {/* Grid */}
-                            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:40px_40px]" />
+          {/* BUTTONS */}
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            {/* PRIMARY BUTTON */}
+            <button className="group flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-7 py-4 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_60px_rgba(59,130,246,0.45)] sm:px-8 sm:py-5 sm:text-sm">
+              Join Membership
 
-                            {/* SVG Chart */}
-                            <svg
-                                viewBox="0 0 600 300"
-                                className="relative z-10 h-full w-full"
-                            >
-                                <defs>
-                                    <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
-                                        <stop offset="0%" stopColor="#22d3ee" />
-                                        <stop offset="100%" stopColor="#3b82f6" />
-                                    </linearGradient>
-                                </defs>
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
 
-                                <path
-                                    d="M0 260 C 60 180, 120 200, 180 120 S 320 40, 420 120 S 520 220, 600 50"
-                                    fill="none"
-                                    stroke="url(#lineGradient)"
-                                    strokeWidth="8"
-                                    strokeLinecap="round"
-                                />
-                            </svg>
+            {/* SECONDARY BUTTON */}
+            <button className="group flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.05] px-7 py-4 text-xs font-black uppercase tracking-[0.2em] text-white backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] sm:px-8 sm:py-5 sm:text-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10">
+                <Play className="ml-0.5 h-4 w-4 fill-white text-white" />
+              </div>
 
-                            {/* Floating Cards */}
-                            <div className="absolute left-5 top-5 rounded-2xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur-md">
-                                <div className="flex items-center gap-3">
-                                    <TrendingUp className="h-5 w-5 text-emerald-400" />
-                                    <div>
-                                        <p className="text-xs text-slate-400">Monthly Profit</p>
-                                        <h4 className="mt-1 text-2xl font-bold text-emerald-400">
-                                            +248%
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
+              Watch Demo
+            </button>
+          </div>
 
-                            <div className="absolute bottom-5 right-5 rounded-2xl border border-white/10 bg-white/10 px-5 py-4 backdrop-blur-md">
-                                <div className="flex items-center gap-3">
-                                    <BarChart3 className="h-5 w-5 text-cyan-400" />
-                                    <div>
-                                        <p className="text-xs text-slate-400">Winning Trades</p>
-                                        <h4 className="mt-1 text-2xl font-bold text-cyan-400">
-                                            84%
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Bottom Features */}
-                        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-                            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                                <ShieldCheck className="mb-3 h-6 w-6 text-cyan-400" />
-                                <h4 className="font-semibold text-white">Secure Access</h4>
-                                <p className="mt-1 text-sm text-slate-400">
-                                    Protected member-only community.
-                                </p>
-                            </div>
-
-                            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                                <Users className="mb-3 h-6 w-6 text-purple-400" />
-                                <h4 className="font-semibold text-white">Private Community</h4>
-                                <p className="mt-1 text-sm text-slate-400">
-                                    Telegram & WhatsApp access.
-                                </p>
-                            </div>
-
-                            <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                                <TrendingUp className="mb-3 h-6 w-6 text-emerald-400" />
-                                <h4 className="font-semibold text-white">Live Analysis</h4>
-                                <p className="mt-1 text-sm text-slate-400">
-                                    Daily expert trading insights.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
+          {/* TRUSTED USERS */}
+          <div className="mt-12 flex flex-col gap-5 sm:flex-row sm:items-center">
+            {/* AVATARS */}
+            <div className="flex -space-x-4">
+              {[1, 2, 3, 4, 5].map((item) => (
+                <img
+                  key={item}
+                  src={`https://i.pravatar.cc/100?img=${item + 10}`}
+                  alt="Trader"
+                  className="h-11 w-11 rounded-full border-2 border-[#030712] object-cover shadow-xl sm:h-12 sm:w-12"
+                />
+              ))}
             </div>
-        </section>
-    );
+
+            {/* TEXT */}
+            <div>
+              <p className="text-sm font-bold text-white sm:text-base">
+                Trusted by 5000+ Traders
+              </p>
+
+              <p className="mt-1 text-xs text-gray-400 sm:text-sm">
+                Learn • Grow • Trade • Earn Together
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= FEATURES ================= */}
+      <div className="relative z-10 px-5 pb-14 lg:px-10 lg:pb-16">
+        {/* CENTER GLOW */}
+        <div className="absolute left-1/2 top-10 h-[250px] w-[250px] -translate-x-1/2 rounded-full bg-blue-600/10 blur-[120px]" />
+
+        {/* GRID */}
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+
+            return (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-[30px] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30 hover:bg-white/[0.07] hover:shadow-[0_20px_70px_rgba(59,130,246,0.15)]"
+              >
+                {/* TOP GLOW */}
+                <div className="absolute right-0 top-0 h-24 w-24 rounded-full bg-blue-500/10 blur-3xl transition-all duration-500 group-hover:bg-blue-500/20" />
+
+                {/* ICON */}
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-blue-500/10 bg-blue-600/10 text-blue-400 transition-all duration-500 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white">
+                  <Icon className="h-7 w-7" />
+                </div>
+
+                {/* CONTENT */}
+                <div className="relative mt-6">
+                  <h3 className="text-lg font-black uppercase tracking-wide text-white">
+                    {feature.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-relaxed text-gray-400 sm:text-[15px]">
+                    {feature.desc}
+                  </p>
+                </div>
+
+                {/* BOTTOM LINE */}
+                <div className="mt-6 h-[2px] w-12 rounded-full bg-blue-500/40 transition-all duration-500 group-hover:w-24 group-hover:bg-blue-400" />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }

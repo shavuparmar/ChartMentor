@@ -1,166 +1,133 @@
+import React from "react";
 import { motion } from "framer-motion";
-import {
-    ShieldCheck,
-    TrendingUp,
-    Users,
-    BarChart3,
-    BadgeDollarSign,
-    BookOpen,
-    BellRing,
-    Smartphone,
+import { 
+  ShieldCheck, 
+  TrendingUp, 
+  Users, 
+  BarChart3, 
+  BookOpen, 
+  Zap, 
+  Target, 
+  MessageCircle, 
+  LineChart,
+  Globe,
+  Lock,
+  Cpu
 } from "lucide-react";
 
-export default function ChartMentorFeatures() {
-    const features = [
-        {
-            icon: TrendingUp,
-            title: "Live Trading Analysis",
-            description:
-                "Get real-time market breakdowns, chart patterns, and expert trade setups every day.",
-        },
-        {
-            icon: Users,
-            title: "Private Community Access",
-            description:
-                "Join exclusive Telegram and WhatsApp groups with active traders and mentors.",
-        },
-        {
-            icon: ShieldCheck,
-            title: "Premium Membership",
-            description:
-                "Unlock premium educational resources, mentorship calls, and advanced strategies.",
-        },
-        {
-            icon: BarChart3,
-            title: "Advanced Chart Strategies",
-            description:
-                "Learn institutional trading concepts, price action, and smart money strategies.",
-        },
-        {
-            icon: BadgeDollarSign,
-            title: "Coupon & Discounts",
-            description:
-                "Apply membership coupons and get instant discounts on premium plans.",
-        },
-        {
-            icon: BookOpen,
-            title: "Trading Learning Hub",
-            description:
-                "Step-by-step trading lessons, PDFs, recorded sessions, and practical guidance.",
-        },
-        {
-            icon: BellRing,
-            title: "Instant Trade Alerts",
-            description:
-                "Receive important market updates and trading alerts directly to your devices.",
-        },
-        {
-            icon: Smartphone,
-            title: "Fully Mobile Friendly",
-            description:
-                "Access your dashboard, mentorship, and community seamlessly on every device.",
-        },
-    ];
+const benefits = [
+  {
+    icon: TrendingUp,
+    title: "Daily Market Analysis",
+    description: "In-depth institutional breakdowns of Nifty, BankNifty and Global Markets every morning.",
+    color: "from-blue-500 to-cyan-500"
+  },
+  {
+    icon: Users,
+    title: "Live Doubt Sessions",
+    description: "Personalized weekend live sessions to decode your charts and solve trading queries.",
+    color: "from-purple-500 to-pink-500"
+  },
+  {
+    icon: Target,
+    title: "High Probability Setups",
+    description: "Access to high R:R institutional setups based on Price Action & SMC logic.",
+    color: "from-emerald-500 to-teal-500"
+  },
+  {
+    icon: BookOpen,
+    title: "Premium Study Vault",
+    description: "Exclusive library of e-books, strategy blueprints, and advanced video modules.",
+    color: "from-orange-500 to-yellow-500"
+  },
+  {
+    icon: MessageCircle,
+    title: "Elite Community",
+    description: "Network with India's most disciplined 5,000+ traders in our private circle.",
+    color: "from-accent-blue to-accent-cyan"
+  },
+  {
+    icon: ShieldCheck,
+    title: "Personal Mentorship",
+    description: "Direct access to mentors for building your personalized risk-management roadmap.",
+    color: "from-indigo-500 to-blue-500"
+  },
+  {
+    icon: LineChart,
+    title: "Psychology Training",
+    description: "Master your trading emotions and learn the institutional mindset of professional players.",
+    color: "from-red-500 to-orange-500"
+  },
+  {
+    icon: Cpu,
+    title: "Algorithmic Insights",
+    description: "Understand the math behind the markets with data-driven institutional insights.",
+    color: "from-cyan-500 to-blue-500"
+  }
+];
 
-    return (
-        <section id="features" className="relative overflow-hidden bg-[#050816] py-24 text-white">
-            {/* Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.12),transparent_28%)]" />
+export default function MembershipBenefits() {
+  return (
+    <section id="membership" className="py-32 bg-[#040816] relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-blue/5 blur-[150px] rounded-full pointer-events-none" />
 
-            <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
-                {/* Heading */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    viewport={{ once: true }}
-                    className="mx-auto max-w-3xl text-center"
-                >
-                    <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-5 py-2 text-sm font-medium text-cyan-300 backdrop-blur-md">
-                        <span className="h-2 w-2 rounded-full bg-cyan-400" />
-                        Powerful Features For Modern Traders
-                    </div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+        <div className="text-center mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-block px-5 py-2 rounded-full glass border-white/10 mb-8 shadow-xl"
+          >
+             <span className="text-[10px] font-black tracking-[0.4em] text-accent-cyan uppercase">Unfair Advantage</span>
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-7xl font-black text-white mb-8 uppercase leading-[1.1] tracking-tight"
+          >
+            Why Join Our <br />
+            <span className="text-gradient italic">Inner Circle?</span>
+          </motion.h2>
+          <p className="text-slate-gray text-xl max-w-2xl mx-auto font-medium">
+            We provide the tools, the logic, and the community. You provide the discipline. Together, we master the markets.
+          </p>
+        </div>
 
-                    <h2 className="text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-                        Everything You Need To
-                        <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                            {" "}
-                            Master Trading
-                        </span>
-                    </h2>
-
-                    <p className="mt-6 text-lg leading-8 text-slate-400">
-                        ChartMentor provides advanced mentorship tools, premium resources,
-                        and professional trading guidance designed for serious traders.
-                    </p>
-                </motion.div>
-
-                {/* Features Grid */}
-                <div className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
-                    {features.map((feature, index) => {
-                        const Icon = feature.icon;
-
-                        return (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: index * 0.08 }}
-                                viewport={{ once: true }}
-                                className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-7 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/30 hover:bg-cyan-400/5"
-                            >
-                                {/* Glow */}
-                                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.18),transparent_55%)]" />
-
-                                {/* Icon */}
-                                <div className="relative mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/20">
-                                    <Icon className="h-8 w-8 text-cyan-400" />
-                                </div>
-
-                                {/* Content */}
-                                <div className="relative">
-                                    <h3 className="text-xl font-bold text-white transition-colors duration-300 group-hover:text-cyan-300">
-                                        {feature.title}
-                                    </h3>
-
-                                    <p className="mt-4 text-sm leading-7 text-slate-400">
-                                        {feature.description}
-                                    </p>
-                                </div>
-
-                                {/* Bottom Border Glow */}
-                                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-500 group-hover:w-full" />
-                            </motion.div>
-                        );
-                    })}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {benefits.map((benefit, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="group relative h-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-accent-blue/20 to-accent-cyan/20 rounded-[45px] blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+              
+              <div className="relative h-full glass-dark p-10 rounded-[45px] border border-white/5 transition-all duration-700 group-hover:border-white/20 group-hover:-translate-y-3 flex flex-col">
+                <div className={`w-16 h-16 rounded-[22px] bg-white/5 p-4 mb-8 transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-inner flex items-center justify-center`}>
+                    <benefit.icon className="text-white w-8 h-8 group-hover:text-accent-cyan transition-colors" />
                 </div>
-
-                {/* Bottom CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    viewport={{ once: true }}
-                    className="mt-24 overflow-hidden rounded-[36px] border border-white/10 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 p-10 backdrop-blur-2xl"
-                >
-                    <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
-                        <div className="max-w-2xl">
-                            <h3 className="text-3xl font-black leading-tight text-white sm:text-4xl">
-                                Start Your Professional Trading Journey Today
-                            </h3>
-
-                            <p className="mt-5 text-lg leading-8 text-slate-300">
-                                Join thousands of traders already learning with ChartMentor and
-                                gain access to premium mentorship resources.
-                            </p>
-                        </div>
-
-                        <button className="rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 text-base font-semibold text-white shadow-2xl shadow-cyan-500/30 transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/50">
-                            Join Membership
-                        </button>
-                    </div>
-                </motion.div>
-            </div>
-        </section>
-    );
+                
+                <h3 className="text-2xl font-black text-white mb-4 uppercase italic tracking-tighter group-hover:text-accent-cyan transition-colors duration-500 leading-tight">
+                  {benefit.title}
+                </h3>
+                <p className="text-slate-gray text-base leading-relaxed font-medium mb-8">
+                  {benefit.description}
+                </p>
+                
+                <div className="mt-auto pt-6 flex items-center gap-3 text-white/20 group-hover:text-accent-blue transition-colors duration-500">
+                  <div className="h-[1px] flex-1 bg-current opacity-20" />
+                  <Zap size={18} />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
