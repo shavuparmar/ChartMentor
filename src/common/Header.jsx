@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 import Logo from "./Logo";
 
@@ -18,6 +20,9 @@ export default function ChartMentorNavbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
+  
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -141,15 +146,33 @@ export default function ChartMentorNavbar() {
         <motion.div
           initial={{ opacity: 0, x: 25 }}
           animate={{ opacity: 1, x: 0 }}
-          className="hidden lg:block"
+          className="hidden lg:flex items-center gap-3"
         >
-          <button
-            onClick={() => handleScrollTo("membership")}
-            className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-[0_0_30px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_45px_rgba(59,130,246,0.35)] xl:px-6"
-          >
-            JOIN NOW
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
+          {user ? (
+            <button
+              onClick={() => navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard')}
+              className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-[0_0_30px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_45px_rgba(59,130,246,0.35)] xl:px-6"
+            >
+              Dashboard
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={() => navigate('/login')}
+                className="group flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-3 text-[11px] font-black uppercase tracking-[0.2em] text-white backdrop-blur-2xl transition-all duration-300 hover:bg-white/[0.08] hover:scale-105 xl:px-6"
+              >
+                Log In
+              </button>
+              <button
+                onClick={() => navigate('/student/register')}
+                className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-[0_0_30px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_45px_rgba(59,130,246,0.35)] xl:px-6"
+              >
+                Sign Up
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            </>
+          )}
         </motion.div>
 
         {/* MOBILE MENU BUTTON */}
@@ -190,13 +213,40 @@ export default function ChartMentorNavbar() {
               ))}
 
               {/* MOBILE CTA */}
-              <button
-                onClick={() => handleScrollTo("membership")}
-                className="mt-2 flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 text-sm font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-blue-600/20"
-              >
-                JOIN MEMBERSHIP
-                <ArrowRight className="h-4 w-4" />
-              </button>
+              {user ? (
+                <button
+                  onClick={() => {
+                    setMobileMenu(false);
+                    navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');
+                  }}
+                  className="mt-2 flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 text-sm font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-blue-600/20"
+                >
+                  Dashboard
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              ) : (
+                <div className="mt-2 flex flex-col gap-3">
+                  <button
+                    onClick={() => {
+                      setMobileMenu(false);
+                      navigate('/login');
+                    }}
+                    className="flex items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-4 text-sm font-black uppercase tracking-[0.2em] text-white"
+                  >
+                    Log In
+                  </button>
+                  <button
+                    onClick={() => {
+                      setMobileMenu(false);
+                      navigate('/student/register');
+                    }}
+                    className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 text-sm font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-blue-600/20"
+                  >
+                    Sign Up
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}

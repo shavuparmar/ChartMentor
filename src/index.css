@@ -8,7 +8,7 @@
   --color-accent-blue: #2563eb;
   --color-accent-cyan: #22d3ee;
   --color-slate-gray: #94a3b8;
-  
+
   --font-sans: "Inter", "Outfit", "system-ui", "sans-serif";
 }
 
@@ -22,7 +22,7 @@
   .glass {
     @apply bg-white/5 backdrop-blur-xl border border-white/10;
   }
-  
+
   .glass-dark {
     @apply bg-[#0B1120]/60 backdrop-blur-2xl border border-white/5;
   }

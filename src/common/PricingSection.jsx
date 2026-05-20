@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Check,
@@ -8,6 +8,9 @@ import {
   Crown,
   Zap,
 } from "lucide-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const features = [
   "Daily Market Analysis",
@@ -20,26 +23,32 @@ const features = [
   "Premium Community Access",
 ];
 
-const plans = [
-  {
-    name: "MONTHLY PLAN",
-    oldPrice: "₹4000",
-    price: "₹1999",
-    duration: "/month",
-    icon: Zap,
-    popular: false,
-  },
-  {
-    name: "QUARTERLY PLAN",
-    oldPrice: "₹11000",
-    price: "₹4999",
-    duration: "/3 months",
-    icon: Crown,
-    popular: true,
-  },
-];
-
 export default function PricingSection() {
+  const [plans, setPlans] = useState([]);
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/plan`);
+        if (res.data.data) {
+          setPlans(res.data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch plans:", error);
+      }
+    };
+    fetchPlans();
+  }, []);
+
+  const handleJoin = (planId) => {
+    if (user) {
+      navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');
+    } else {
+      navigate(`/student/register?plan=${planId}`);
+    }
+  };
   return (
     <section
       id="pricing"
@@ -85,11 +94,12 @@ export default function PricingSection() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 
           {plans.map((plan, index) => {
-            const Icon = plan.icon;
+            const Icon = index % 2 === 0 ? Zap : Crown;
+            const popular = index === 1;
 
             return (
               <motion.div
-                key={index}
+                key={plan.id}
                 initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{
@@ -98,13 +108,13 @@ export default function PricingSection() {
                 }}
                 viewport={{ once: true }}
                 className={`group relative overflow-hidden rounded-[36px] border p-8 backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 sm:p-10 ${
-                  plan.popular
+                  popular
                     ? "border-blue-500/30 bg-gradient-to-b from-blue-500/[0.08] to-transparent shadow-[0_0_80px_rgba(59,130,246,0.15)]"
                     : "border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.02]"
                 }`}
               >
                 {/* Popular Badge */}
-                {plan.popular && (
+                {popular && (
                   <div className="absolute right-5 top-5 rounded-full border border-blue-500/30 bg-blue-500/20 px-4 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-blue-300">
                     Most Popular
                   </div>
@@ -125,24 +135,16 @@ export default function PricingSection() {
 
                 {/* PRICE */}
                 <div className="relative mt-8">
-                  <span className="text-xl text-gray-500 line-through">
-                    {plan.oldPrice}
-                  </span>
-
                   <div className="mt-2 flex items-end gap-2">
                     <span className="text-5xl font-black sm:text-6xl">
-                      {plan.price}
-                    </span>
-
-                    <span className="pb-2 text-sm text-gray-400">
-                      {plan.duration}
+                      ₹{plan.price}
                     </span>
                   </div>
                 </div>
 
                 {/* OFFER */}
                 <div className="mt-6 inline-flex rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-blue-300">
-                  LIMITED OFFER
+                  {plan.description || "LIMITED OFFER"}
                 </div>
 
                 <p className="mt-3 text-sm text-gray-400">
@@ -151,8 +153,7 @@ export default function PricingSection() {
 
                 {/* FEATURES */}
                 <div className="mt-10 space-y-4">
-
-                  {features.slice(0, 5).map((feature, i) => (
+                  {(plan.features?.length > 0 ? plan.features : features.slice(0, 5)).map((feature, i) => (
                     <div
                       key={i}
                       className="flex items-center gap-3"
@@ -169,8 +170,11 @@ export default function PricingSection() {
                 </div>
 
                 {/* BUTTON */}
-                <button className="group/button mt-10 flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.25em] text-white shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_60px_rgba(59,130,246,0.4)]">
-                  JOIN NOW
+                <button 
+                  onClick={() => handleJoin(plan.id)}
+                  className="group/button mt-10 flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.25em] text-white shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_60px_rgba(59,130,246,0.4)]"
+                >
+                  {user ? "Dashboard" : "Join Now"}
 
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/button:translate-x-1" />
                 </button>

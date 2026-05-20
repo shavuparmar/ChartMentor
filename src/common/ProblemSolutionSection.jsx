@@ -12,7 +12,7 @@ const ProblemSolution = () => {
   const problems = [
     "YouTube Videos se Confusion badh raha hai",
     "Expensive Courses but no proper guidance",
-    "Doubts hote hain, puchne wala koi nahi",
+    "Doubts hote hain, Clear krne wala koi nhi",
     "Consistency maintain nahi ho pa rahi",
     "Losses ho rahe hain, reason samajh nahi aa raha",
     "Right strategy hai, but execution wrong",
@@ -55,7 +55,7 @@ const ProblemSolution = () => {
           <h2 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-7xl">
             Kya Aap In Problems Se
             <span className="mt-3 block bg-gradient-to-r from-red-400 to-orange-300 bg-clip-text text-transparent">
-              Joojh Rahe Ho?
+              Face Rahe Ho?
             </span>
           </h2>
 
