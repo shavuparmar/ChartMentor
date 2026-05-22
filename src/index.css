@@ -39,4 +39,20 @@
     content: '';
     @apply absolute -top-1/2 -left-1/2 w-full h-full bg-accent-blue/20 blur-[120px] rounded-full pointer-events-none;
   }
+
+  .skeleton {
+    @apply animate-pulse bg-white/5 relative overflow-hidden;
+  }
+
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }

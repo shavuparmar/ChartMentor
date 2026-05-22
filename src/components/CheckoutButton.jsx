@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
+import { CreditCard, Loader2 } from 'lucide-react';
 
-export default function CheckoutButton({ amount, planId }) {
+export default function CheckoutButton({ amount, planId, className = "" }) {
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const handlePayment = async () => {
@@ -37,11 +40,11 @@ export default function CheckoutButton({ amount, planId }) {
           }
         },
         prefill: {
-          name: "Student",
-          email: "student@example.com",
+          name: user ? `${user.firstName} ${user.lastName}` : "Student",
+          email: user?.email || "student@example.com",
         },
         theme: {
-          color: "#000000"
+          color: "#2563eb"
         }
       };
 
@@ -62,9 +65,19 @@ export default function CheckoutButton({ amount, planId }) {
     <button 
       onClick={handlePayment} 
       disabled={loading}
-      className="px-6 py-3 bg-black text-white font-bold hover:bg-gray-800 transition-colors disabled:opacity-50"
+      className={`w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] transition-all duration-300 rounded-xl text-white font-bold text-xs uppercase tracking-[0.15em] disabled:opacity-50 disabled:scale-100 disabled:shadow-none flex items-center justify-center gap-2 cursor-pointer ${className}`}
     >
-      {loading ? 'Processing...' : 'Pay with Razorpay'}
+      {loading ? (
+        <>
+          <Loader2 className="w-4 h-4 animate-spin text-white" />
+          Processing...
+        </>
+      ) : (
+        <>
+          <CreditCard className="w-4 h-4" />
+          Pay with Razorpay
+        </>
+      )}
     </button>
   );
 }

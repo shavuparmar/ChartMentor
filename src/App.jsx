@@ -1,13 +1,14 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from './context/AuthContext';
+import { SocketProvider } from './context/SocketContext';
+import { Toaster } from 'react-hot-toast';
+import ErrorBoundary from './common/ErrorBoundary';
 
 // Lazy Imports
 const Loader = lazy(() => import("./common/Loader.jsx"));
 const LandingPage = lazy(() => import("./pages/LandingPage.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
-
-import { AuthProvider } from './context/AuthContext';
-import { Toaster } from 'react-hot-toast';
 
 const AdminLayout = lazy(() => import('./admin/layouts/AdminLayout'));
 const AdminDashboard = lazy(() => import('./admin/pages/AdminDashboard'));
@@ -31,18 +32,20 @@ const StudentSettings = lazy(() => import('./student/pages/Settings'));
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Toaster position="top-right" />
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
+    <ErrorBoundary>
+      <AuthProvider>
+        <SocketProvider>
+          <BrowserRouter>
+            <Toaster position="top-right" />
+            <Suspense fallback={<Loader />}>
+              <Routes>
+              <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
 
             {/* New Routes */}
-            <Route path="/student/register" element={<StudentRegister />} />
-            <Route path="/student/forgot-password" element={<StudentForgotPassword />} />
-            <Route path="/student/reset-password" element={<StudentResetPassword />} />
+            <Route path="/register" element={<StudentRegister />} />
+            <Route path="/forgot-password" element={<StudentForgotPassword />} />
+            <Route path="/reset-password" element={<StudentResetPassword />} />
 
             <Route path="/admin" element={<AdminLayout />}>
               <Route path="dashboard" element={<AdminDashboard />} />
@@ -66,6 +69,8 @@ export default function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
+      </SocketProvider>
     </AuthProvider>
+    </ErrorBoundary>
   );
 }

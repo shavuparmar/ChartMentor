@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { MessageSquare, Clock, CheckCircle2, CircleDashed, X, Send, User, ShieldCheck } from 'lucide-react';
+import { Skeleton } from '../../common/Loader';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AdminSupportTickets() {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [replyMessage, setReplyMessage] = useState('');
   const [activeTicket, setActiveTicket] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const fetchTickets = async () => {
     try {
@@ -29,6 +33,7 @@ export default function AdminSupportTickets() {
   const handleReply = async (e, ticketId) => {
     e.preventDefault();
     if (!replyMessage.trim()) return;
+    setSubmitting(true);
     try {
       const token = localStorage.getItem('token');
       await axios.post(`${import.meta.env.VITE_API_URL}/api/admin/support-tickets/${ticketId}/reply`, 
@@ -41,6 +46,8 @@ export default function AdminSupportTickets() {
       fetchTickets();
     } catch (error) {
       toast.error('Failed to send reply');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -57,86 +64,163 @@ export default function AdminSupportTickets() {
     }
   };
 
-  if (loading) return <div>Loading support tickets...</div>;
+  if (loading) {
+    return (
+      <div className="space-y-6 max-w-5xl font-sans text-white">
+        <Skeleton className="h-10 w-64 rounded-xl" />
+        <div className="space-y-4">
+          <Skeleton className="h-40 w-full rounded-[2rem]" />
+          <Skeleton className="h-40 w-full rounded-[2rem]" />
+        </div>
+      </div>
+    );
+  }
+
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case 'OPEN':
+        return (
+          <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
+            <CheckCircle2 className="w-3.5 h-3.5" /> Open
+          </span>
+        );
+      case 'CLOSED':
+        return (
+          <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gray-500/10 text-gray-400 border border-gray-500/20 whitespace-nowrap">
+            <X className="w-3.5 h-3.5" /> Closed
+          </span>
+        );
+      default:
+        return (
+          <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20 whitespace-nowrap">
+            <CircleDashed className="w-3.5 h-3.5 animate-spin-slow" /> {status}
+          </span>
+        );
+    }
+  };
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Support Tickets</h1>
+    <div className="space-y-8 max-w-5xl font-sans text-white">
+      
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl sm:text-4xl font-black tracking-tight flex items-center gap-3">
+          <MessageSquare className="w-8 h-8 text-blue-400" />
+          Support Tickets
+        </h1>
+        <p className="text-gray-400 mt-2 text-sm sm:text-base">
+          Manage and reply to student inquiries and issues.
+        </p>
+      </div>
 
-      <div className="space-y-4">
+      {/* Tickets List */}
+      <div className="space-y-6">
         {tickets.map(ticket => (
-          <div key={ticket.id} className="bg-gray-900 border border-gray-800 p-6 rounded-sm">
-            <div className="flex justify-between items-center mb-4 border-b border-gray-800 pb-4">
+          <div key={ticket.id} className="bg-white/[0.02] border border-white/5 rounded-[2rem] overflow-hidden backdrop-blur-xl hover:border-white/10 transition-colors shadow-2xl group relative">
+            
+            {/* Header section */}
+            <div className="p-6 sm:p-8 border-b border-white/5 flex flex-col sm:flex-row justify-between items-start gap-4">
               <div>
-                <h2 className="text-xl font-bold text-white">{ticket.subject}</h2>
-                <p className="text-sm text-gray-400 mt-1">From: {ticket.user?.email}</p>
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-2">{ticket.subject}</h2>
+                <div className="flex items-center gap-4 text-sm text-gray-400">
+                  <span className="flex items-center gap-1.5"><User className="w-4 h-4" /> {ticket.user?.email}</span>
+                  <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {new Date(ticket.createdAt).toLocaleDateString()}</span>
+                </div>
               </div>
-              <div className="flex items-center space-x-4">
-                <span className={`px-2 py-1 text-xs font-bold ${
-                  ticket.status === 'OPEN' ? 'bg-white text-black' : 
-                  ticket.status === 'CLOSED' ? 'bg-gray-800 text-gray-500' : 
-                  'bg-gray-700 text-white'
-                }`}>
-                  {ticket.status}
-                </span>
+              <div className="flex flex-col items-end gap-3 flex-shrink-0">
+                {getStatusBadge(ticket.status)}
                 {ticket.status !== 'CLOSED' && (
                   <button 
                     onClick={() => handleClose(ticket.id)}
-                    className="text-xs text-gray-400 hover:text-white underline"
+                    className="text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-red-400 transition-colors flex items-center gap-1"
                   >
-                    Close Ticket
+                    <X className="w-3 h-3" /> Mark Closed
                   </button>
                 )}
               </div>
             </div>
 
-            <div className="space-y-4 mb-4">
-              {ticket.replies.map(reply => (
-                <div key={reply.id} className={`p-4 rounded-sm ${reply.adminId ? 'bg-gray-800 border-l-2 border-white' : 'bg-black'}`}>
-                  <p className="text-xs font-bold text-gray-400 mb-1">{reply.adminId ? 'Admin Reply' : 'User Message'}</p>
-                  <p className="text-gray-200 whitespace-pre-wrap">{reply.message}</p>
-                </div>
-              ))}
+            {/* Chat History */}
+            <div className="p-6 sm:p-8 space-y-6 bg-black/20">
+              {ticket.replies.map((reply) => {
+                const isAdmin = !!reply.adminId;
+                return (
+                  <div key={reply.id} className={`flex ${isAdmin ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[85%] sm:max-w-[75%] rounded-2xl p-5 ${
+                      isAdmin 
+                        ? 'bg-blue-600/10 border border-blue-500/20 text-gray-200 rounded-tr-sm' 
+                        : 'bg-white/5 border border-white/10 text-gray-300 rounded-tl-sm'
+                    }`}>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className={`text-xs font-bold uppercase tracking-wider flex items-center gap-1 ${isAdmin ? 'text-blue-400' : 'text-gray-400'}`}>
+                          {isAdmin ? <><ShieldCheck className="w-3 h-3"/> You</> : <><User className="w-3 h-3"/> Student</>}
+                        </span>
+                        <span className="text-[10px] text-gray-500">• {new Date(reply.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                      </div>
+                      <p className="text-sm sm:text-base leading-relaxed whitespace-pre-wrap">{reply.message}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            {ticket.status !== 'CLOSED' && activeTicket !== ticket.id && (
-              <button 
-                onClick={() => setActiveTicket(ticket.id)}
-                className="px-4 py-2 bg-white text-black text-sm font-bold hover:bg-gray-200 transition-colors"
-              >
-                Reply
-              </button>
-            )}
+            {/* Actions / Reply Form */}
+            <div className="p-6 sm:p-8 border-t border-white/5 bg-white/[0.01]">
+              {ticket.status !== 'CLOSED' && activeTicket !== ticket.id && (
+                <button 
+                  onClick={() => setActiveTicket(ticket.id)}
+                  className="w-full sm:w-auto px-6 py-3 bg-white text-black font-bold text-sm uppercase tracking-wide rounded-xl hover:bg-gray-200 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  Reply to Ticket
+                </button>
+              )}
 
-            {activeTicket === ticket.id && (
-              <form onSubmit={(e) => handleReply(e, ticket.id)} className="mt-4 border-t border-gray-800 pt-4">
-                <textarea 
-                  value={replyMessage}
-                  onChange={e => setReplyMessage(e.target.value)}
-                  placeholder="Type your reply here..."
-                  required
-                  rows="3"
-                  className="w-full bg-black border border-gray-800 focus:border-white outline-none px-4 py-2 text-white transition-colors mb-2"
-                ></textarea>
-                <div className="flex space-x-2">
-                  <button type="submit" className="px-4 py-2 bg-white text-black text-sm font-bold hover:bg-gray-200 transition-colors">
-                    Send Reply
-                  </button>
-                  <button 
-                    type="button" 
-                    onClick={() => setActiveTicket(null)}
-                    className="px-4 py-2 border border-gray-800 text-white text-sm hover:bg-gray-800 transition-colors"
+              <AnimatePresence>
+                {activeTicket === ticket.id && (
+                  <motion.form 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    onSubmit={(e) => handleReply(e, ticket.id)} 
+                    className="space-y-4 overflow-hidden"
                   >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            )}
+                    <textarea 
+                      value={replyMessage}
+                      onChange={e => setReplyMessage(e.target.value)}
+                      placeholder="Type your official response here..."
+                      required
+                      rows="4"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-blue-500/50 focus:bg-white/[0.05] transition-all placeholder:text-gray-600 resize-none"
+                    ></textarea>
+                    <div className="flex justify-end gap-3">
+                      <button 
+                        type="button" 
+                        onClick={() => setActiveTicket(null)}
+                        className="px-6 py-3 rounded-xl font-bold text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
+                      >
+                        Cancel
+                      </button>
+                      <button 
+                        type="submit" 
+                        disabled={submitting}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-sm uppercase tracking-wide hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] disabled:opacity-50 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      >
+                        <Send className="w-4 h-4" />
+                        {submitting ? 'Sending...' : 'Send Reply'}
+                      </button>
+                    </div>
+                  </motion.form>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         ))}
+
         {tickets.length === 0 && (
-          <div className="text-center py-8 text-gray-500 border border-gray-800 bg-gray-900 rounded-sm">
-            No support tickets.
+          <div className="rounded-[2rem] border border-white/5 bg-white/[0.01] p-16 text-center">
+            <MessageSquare className="w-16 h-16 text-gray-600 mx-auto mb-6" />
+            <p className="text-lg font-bold tracking-wide text-gray-300">Inbox Zero!</p>
+            <p className="text-sm text-gray-500 mt-2">No active support tickets to display.</p>
           </div>
         )}
       </div>

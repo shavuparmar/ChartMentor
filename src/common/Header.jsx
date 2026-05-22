@@ -165,7 +165,7 @@ export default function ChartMentorNavbar() {
                 Log In
               </button>
               <button
-                onClick={() => navigate('/student/register')}
+                onClick={() => navigate('/register')}
                 className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-[0_0_30px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_45px_rgba(59,130,246,0.35)] xl:px-6"
               >
                 Sign Up
@@ -238,7 +238,7 @@ export default function ChartMentorNavbar() {
                   <button
                     onClick={() => {
                       setMobileMenu(false);
-                      navigate('/student/register');
+                      navigate('/register');
                     }}
                     className="flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 text-sm font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-blue-600/20"
                   >

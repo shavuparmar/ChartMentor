@@ -60,10 +60,10 @@ export default function StudentLogin() {
           </button>
         </form>
         <div className="mt-4 flex justify-between text-sm">
-          <Link to="/student/forgot-password" className="text-gray-600 hover:text-black hover:underline transition-colors font-medium">
+          <Link to="/forgot-password" className="text-gray-600 hover:text-black hover:underline transition-colors font-medium">
             Forgot Password?
           </Link>
-          <Link to="/student/register" className="text-gray-600 hover:text-black hover:underline transition-colors font-medium">
+          <Link to="/register" className="text-gray-600 hover:text-black hover:underline transition-colors font-medium">
             Create Account
           </Link>
         </div>

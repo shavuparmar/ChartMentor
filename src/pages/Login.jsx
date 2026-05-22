@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import Logo from "../common/Logo";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -24,7 +25,7 @@ export default function Login() {
       const { token, role } = res.data.data;
       login(res.data.data, token);
       toast.success('Login successful');
-      
+
       if (role === 'admin') {
         navigate('/admin/dashboard');
       } else {
@@ -38,64 +39,88 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#050816] px-4">
-      <div className="w-full max-w-md bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-[#040816] px-4 py-12 relative overflow-hidden font-sans">
+      {/* Background Decorative Glows */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-600/10 blur-[150px] rounded-full pointer-events-none" />
+
+      <div className="w-full max-w-md bg-white/[0.02] border border-white/10 backdrop-blur-2xl rounded-[2rem] p-8 sm:p-10 shadow-2xl relative z-10 hover:border-white/15 transition-all duration-500">
 
         {/* Logo / Heading */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white">
+        <div className="text-center mb-8 flex flex-col items-center">
+          <Link to="/" className="group flex items-center gap-3 mb-6">
+            <div className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-2 backdrop-blur-md group-hover:scale-105 transition-transform duration-300">
+              <Logo size={40} color="white" backgroundColor="#0f172a" />
+            </div>
+            <div className="flex flex-col items-start leading-none">
+              <h1 className="text-lg font-black uppercase tracking-tight text-white">
+                CHART<span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">MENTOR</span>
+              </h1>
+              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-gray-400">MEMBERSHIP</span>
+            </div>
+          </Link>
+          <h2 className="text-3xl font-black tracking-tight text-white">
             Welcome Back
-          </h1>
-          <p className="text-gray-400 mt-2">
-            Login to continue your journey
+          </h2>
+          <p className="text-gray-400 mt-2 text-sm">
+            Sign in to access your trading dashboard
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-6">
 
           {/* Email */}
-          <div>
-            <label className="text-sm text-gray-300 mb-2 block">
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-wider text-gray-300">
               Email Address
             </label>
 
-            <div className="flex items-center bg-white/10 border border-white/10 rounded-xl px-4 focus-within:border-cyan-500 transition-colors">
-              <Mail className="text-gray-400 w-5 h-5" />
+            <div className="flex items-center bg-white/[0.03] border border-white/5 rounded-2xl px-4 focus-within:border-blue-500/50 focus-within:bg-white/[0.05] focus-within:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300">
+              <Mail className="text-gray-500 w-5 h-5 flex-shrink-0" />
 
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
-                placeholder="Enter your email"
-                className="w-full bg-transparent outline-none px-3 py-4 text-white placeholder:text-gray-500"
+                placeholder="name@example.com"
+                className="w-full bg-transparent outline-none px-3 py-4 text-white text-sm placeholder:text-gray-600"
               />
             </div>
           </div>
 
           {/* Password */}
-          <div>
-            <label className="text-sm text-gray-300 mb-2 block">
-              Password
-            </label>
+          <div className="space-y-2">
+            <div className="flex justify-between items-center">
+              <label className="text-xs font-bold uppercase tracking-wider text-gray-300">
+                Password
+              </label>
+              <Link
 
-            <div className="flex items-center bg-white/10 border border-white/10 rounded-xl px-4 focus-within:border-cyan-500 transition-colors">
-              <Lock className="text-gray-400 w-5 h-5" />
+                to="/forgot-password"
+                className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+
+            <div className="flex items-center bg-white/[0.03] border border-white/5 rounded-2xl px-4 focus-within:border-blue-500/50 focus-within:bg-white/[0.05] focus-within:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300">
+              <Lock className="text-gray-500 w-5 h-5 flex-shrink-0" />
 
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
-                placeholder="Enter your password"
-                className="w-full bg-transparent outline-none px-3 py-4 text-white placeholder:text-gray-500"
+                placeholder="••••••••"
+                className="w-full bg-transparent outline-none px-3 py-4 text-white text-sm placeholder:text-gray-600"
               />
 
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-gray-400 hover:text-white transition"
+                className="text-gray-500 hover:text-white transition-colors"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" />
@@ -106,36 +131,33 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Remember & Forgot */}
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2 text-gray-400 cursor-pointer">
-              <input type="checkbox" className="accent-cyan-500" />
-              Remember me
+          {/* Remember Me */}
+          <div className="flex items-center">
+            <label className="flex items-center gap-2.5 text-xs text-gray-400 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded-lg bg-white/5 border-white/10 text-blue-500 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-blue-500"
+              />
+              Remember my session
             </label>
-
-            <Link
-              to="/student/forgot-password"
-              className="text-cyan-400 hover:text-cyan-300 transition"
-            >
-              Forgot Password?
-            </Link>
           </div>
 
           {/* Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 transition-all duration-300 py-4 rounded-xl text-black font-semibold text-lg shadow-lg shadow-cyan-500/20"
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:scale-100 disabled:shadow-none hover:shadow-[0_0_30px_rgba(59,130,246,0.35)] transition-all duration-300 py-4 rounded-2xl text-white font-black text-sm uppercase tracking-[0.15em] flex items-center justify-center gap-2 cursor-pointer"
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? 'Logging in...' : 'Sign In'}
+            {!loading && <ArrowRight className="w-4 h-4" />}
           </button>
         </form>
 
         {/* Footer */}
-        <div className="mt-8 text-center text-gray-400">
+        <div className="mt-8 text-center text-xs text-gray-400">
           Don&apos;t have an account?{" "}
-          <Link to="/student/register" className="text-cyan-400 hover:text-cyan-300 transition">
-            Sign Up
+          <Link to="/register" className="text-blue-400 hover:text-blue-300 font-bold hover:underline transition">
+            Sign Up Now
           </Link>
         </div>
       </div>

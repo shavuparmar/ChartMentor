@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaInstagram,
   FaYoutube,
@@ -46,6 +47,28 @@ const legalLinks = [
 ];
 
 export default function Footer() {
+  const navigate = useNavigate();
+
+  const handleLinkClick = (e, path) => {
+    if (path.startsWith("/")) {
+      const sectionId = path === "/" ? "home" : path.replace("/", "");
+      const section = document.getElementById(sectionId);
+      if (section) {
+        e.preventDefault();
+        section.scrollIntoView({ behavior: "smooth" });
+      } else {
+        e.preventDefault();
+        navigate("/");
+        setTimeout(() => {
+          const targetSection = document.getElementById(sectionId);
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      }
+    }
+  };
+
   return (
     <footer className="relative overflow-hidden bg-[#030712] text-white">
       {/* Background Glow */}
@@ -95,13 +118,13 @@ export default function Footer() {
 
             {/* Right Button */}
             <div className="flex lg:justify-end">
-              <a
-                href="/membership"
-                className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.35)]"
+              <button
+                onClick={(e) => handleLinkClick(e, "/membership")}
+                className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.35)] cursor-pointer"
               >
                 JOIN NOW
                 <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -163,13 +186,14 @@ export default function Footer() {
             <ul className="space-y-4">
               {quickLinks.map((link, i) => (
                 <li key={i}>
-                  <a
-                    href={link.path}
+                  <Link
+                    to={link.path}
+                    onClick={(e) => handleLinkClick(e, link.path)}
                     className="group inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-all duration-300 hover:text-blue-400"
                   >
                     <span className="h-[2px] w-0 bg-blue-500 transition-all duration-300 group-hover:w-4" />
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -184,13 +208,13 @@ export default function Footer() {
             <ul className="space-y-4">
               {legalLinks.map((link, i) => (
                 <li key={i}>
-                  <a
-                    href={link.path}
+                  <Link
+                    to={link.path}
                     className="group inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-all duration-300 hover:text-blue-400"
                   >
                     <span className="h-[2px] w-0 bg-blue-500 transition-all duration-300 group-hover:w-4" />
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -251,17 +275,17 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-5 text-xs text-gray-500">
-            <a href="/privacy-policy" className="hover:text-blue-400">
+            <Link to="/privacy-policy" className="hover:text-blue-400">
               Privacy
-            </a>
+            </Link>
 
-            <a href="/terms" className="hover:text-blue-400">
+            <Link to="/terms" className="hover:text-blue-400">
               Terms
-            </a>
+            </Link>
 
-            <a href="/refund-policy" className="hover:text-blue-400">
+            <Link to="/refund-policy" className="hover:text-blue-400">
               Refund
-            </a>
+            </Link>
           </div>
         </div>
       </div>

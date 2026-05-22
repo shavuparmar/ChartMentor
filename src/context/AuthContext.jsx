@@ -10,6 +10,18 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Axios interceptor for global 401 handling
+    const interceptor = axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401) {
+          localStorage.removeItem('token');
+          setUser(null);
+        }
+        return Promise.reject(error);
+      }
+    );
+
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
       if (token) {
@@ -25,6 +37,10 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     };
     checkAuth();
+
+    return () => {
+      axios.interceptors.response.eject(interceptor);
+    };
   }, []);
 
   const login = (userData, token) => {
