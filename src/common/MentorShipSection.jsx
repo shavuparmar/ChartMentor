@@ -1,10 +1,10 @@
 import React from 'react';
-import { 
-  BarChart3, 
-  TrendingUp, 
-  MessagesSquare, 
-  UserRoundCheck, 
-  Map, 
+import {
+  BarChart3,
+  TrendingUp,
+  MessagesSquare,
+  UserRoundCheck,
+  Map,
   BrainCircuit,
   Users,
   Video,
@@ -47,10 +47,10 @@ const MembershipFeatures = () => {
   ];
 
   const stats = [
-    { icon: <Users className="w-6 h-6" />, value: "5000+", label: "Happy Members" },
+    { icon: <Users className="w-6 h-6" />, value: "1500+", label: "Happy Members" },
     { icon: <Video className="w-6 h-6" />, value: "200+", label: "Live Sessions" },
     { icon: <Smile className="w-6 h-6" />, value: "95%", label: "Satisfaction Rate" },
-    { icon: <Clock className="w-6 h-6" />, value: "2+ Years", label: "Of Experience" }
+    { icon: <Clock className="w-6 h-6" />, value: "5+ Years", label: "Of Experience" }
   ];
 
   return (
@@ -69,8 +69,8 @@ const MembershipFeatures = () => {
         {/* Features Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-12">
           {features.map((item, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-300 hover:bg-white/[0.06] hover:border-blue-500/50 hover:-translate-y-1 group"
             >
               <div className="mb-6 p-3 rounded-xl bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">

@@ -75,18 +75,16 @@ export default function HeroSection() {
 
           {/* HEADING */}
           <h1 className="mt-7 text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-            Learn Trading
+            Trading Sikhna muskil nhi
 
             <span className="mt-2 block bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
-              Like a Professional
+              Akele Sikhna muskil hain
             </span>
           </h1>
 
           {/* DESCRIPTION */}
           <p className="mt-6 max-w-2xl text-sm leading-relaxed text-gray-300 sm:text-base md:text-lg lg:text-xl">
-            Master price action, trading psychology, risk management, and
-            advanced trading strategies with live mentorship, real market
-            sessions, and practical learning from experienced traders.
+            Beginner traders ke liye proper guidance, live support, daily analysis aur step-by-step roadmap - taki aap market ko confidence ke saath samajh sako.
           </p>
 
           {/* BUTTONS */}

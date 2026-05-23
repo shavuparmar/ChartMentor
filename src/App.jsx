@@ -9,6 +9,11 @@ import ErrorBoundary from './common/ErrorBoundary';
 const Loader = lazy(() => import("./common/Loader.jsx"));
 const LandingPage = lazy(() => import("./pages/LandingPage.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"))
+const TermsandCondition = lazy(() => import("./pages/TermsandCondition.jsx"))
+const RefundPolicy = lazy(() => import("./pages/RefundPolicy.jsx"))
+const Sitemap = lazy(() => import("./pages/Sitemap.jsx"))
+
 
 const AdminLayout = lazy(() => import('./admin/layouts/AdminLayout'));
 const AdminDashboard = lazy(() => import('./admin/pages/AdminDashboard'));
@@ -39,38 +44,43 @@ export default function App() {
             <Toaster position="top-right" />
             <Suspense fallback={<Loader />}>
               <Routes>
-              <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-and-conditions" element={<TermsandCondition />} />
+                <Route path="/refund-policy" element={<RefundPolicy />} />
+                <Route path="/sitemap" element={<Sitemap />} />
 
-            {/* New Routes */}
-            <Route path="/register" element={<StudentRegister />} />
-            <Route path="/forgot-password" element={<StudentForgotPassword />} />
-            <Route path="/reset-password" element={<StudentResetPassword />} />
 
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="settings" element={<AdminSettings />} />
-              <Route path="students" element={<AdminStudents />} />
-              <Route path="payments" element={<AdminPayments />} />
-              <Route path="plans" element={<AdminPlans />} />
-              <Route path="notifications" element={<AdminNotifications />} />
-              <Route path="support" element={<AdminSupportTickets />} />
-              {/* Additional admin routes can be added here */}
-            </Route>
+                {/* New Routes */}
+                <Route path="/register" element={<StudentRegister />} />
+                <Route path="/forgot-password" element={<StudentForgotPassword />} />
+                <Route path="/reset-password" element={<StudentResetPassword />} />
 
-            <Route path="/student" element={<StudentLayout />}>
-              <Route path="dashboard" element={<StudentDashboard />} />
-              <Route path="invoices" element={<StudentInvoices />} />
-              <Route path="notifications" element={<StudentNotifications />} />
-              <Route path="support" element={<StudentSupport />} />
-              <Route path="settings" element={<StudentSettings />} />
-              {/* Additional student routes can be added here */}
-            </Route>
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-      </SocketProvider>
-    </AuthProvider>
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route path="dashboard" element={<AdminDashboard />} />
+                  <Route path="settings" element={<AdminSettings />} />
+                  <Route path="students" element={<AdminStudents />} />
+                  <Route path="payments" element={<AdminPayments />} />
+                  <Route path="plans" element={<AdminPlans />} />
+                  <Route path="notifications" element={<AdminNotifications />} />
+                  <Route path="support" element={<AdminSupportTickets />} />
+                  {/* Additional admin routes can be added here */}
+                </Route>
+
+                <Route path="/student" element={<StudentLayout />}>
+                  <Route path="dashboard" element={<StudentDashboard />} />
+                  <Route path="invoices" element={<StudentInvoices />} />
+                  <Route path="notifications" element={<StudentNotifications />} />
+                  <Route path="support" element={<StudentSupport />} />
+                  <Route path="settings" element={<StudentSettings />} />
+                  {/* Additional student routes can be added here */}
+                </Route>
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </SocketProvider>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }

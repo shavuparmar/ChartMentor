@@ -42,7 +42,7 @@ const quickLinks = [
 
 const legalLinks = [
   { name: "Privacy Policy", path: "/privacy-policy" },
-  { name: "Terms & Conditions", path: "/terms" },
+  { name: "Terms & Conditions", path: "/terms-and-conditions" },
   { name: "Refund Policy", path: "/refund-policy" },
 ];
 
@@ -93,7 +93,7 @@ export default function Footer() {
 
           {/* Content */}
           <div className="relative z-10 flex flex-col gap-10 px-6 py-14 md:px-12 lg:flex-row lg:items-center lg:justify-between lg:px-16 lg:py-20">
-            
+
             {/* Left */}
             <div className="max-w-2xl">
               <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-blue-400">

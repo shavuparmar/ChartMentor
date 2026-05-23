@@ -81,7 +81,7 @@ export default function AboutSection() {
                     </h4>
 
                     <p className="mt-1 text-sm text-gray-400">
-                      2+ Years of Trading Experience
+                      5+ Years of Trading Experience
                     </p>
                   </div>
                 </div>
@@ -115,11 +115,11 @@ export default function AboutSection() {
             <div className="mt-8 space-y-6 text-base leading-relaxed text-gray-300 sm:text-lg">
 
               <p>
-                Mera naam{" "}
+                Mera naam {""}
                 <span className="font-bold text-white">
                   Arun
-                </span>{" "}
-                hai aur pichhle 2+ saalon se main actively trading kar raha hu.
+                </span> {"Gupta"}
+                hai aur pichhle 5+ saalon se main actively trading kar raha hu.
               </p>
 
               <p>
@@ -150,7 +150,7 @@ export default function AboutSection() {
 
               <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl">
                 <h4 className="text-3xl font-black text-blue-400">
-                  5000+
+                  1500+
                 </h4>
 
                 <p className="mt-2 text-sm uppercase tracking-wide text-gray-400">
@@ -160,7 +160,7 @@ export default function AboutSection() {
 
               <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl">
                 <h4 className="text-3xl font-black text-blue-400">
-                  2+ Years
+                  5+ Years
                 </h4>
 
                 <p className="mt-2 text-sm uppercase tracking-wide text-gray-400">

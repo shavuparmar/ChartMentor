@@ -12,7 +12,7 @@ const ProblemSolution = () => {
   const problems = [
     "YouTube Videos se Confusion badh raha hai",
     "Expensive Courses but no proper guidance",
-    "Doubts hote hain, Clear krne wala koi nhi",
+    "Doubts hote hain, Lekin clear krne wala koi nhi",
     "Consistency maintain nahi ho pa rahi",
     "Losses ho rahe hain, reason samajh nahi aa raha",
     "Right strategy hai, but execution wrong",
