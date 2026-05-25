@@ -8,6 +8,37 @@ export default function AdminPayments() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
 
+  const downloadInvoice = async (invoiceId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`/api/invoice/${invoiceId}/download`, {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Invoice download failed");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${invoiceId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Invoice download error:", error);
+      alert("Unable to download invoice. Please try again.");
+    }
+  };
+
   useEffect(() => {
     const fetchPayments = async () => {
       try {
@@ -25,8 +56,8 @@ export default function AdminPayments() {
     fetchPayments();
   }, []);
 
-  const filteredPayments = payments.filter(p => 
-    p.user?.email?.toLowerCase().includes(search.toLowerCase()) || 
+  const filteredPayments = payments.filter(p =>
+    p.user?.email?.toLowerCase().includes(search.toLowerCase()) ||
     p.merchantTransactionId?.toLowerCase().includes(search.toLowerCase()) ||
     p.id.toLowerCase().includes(search.toLowerCase())
   );
@@ -68,7 +99,7 @@ export default function AdminPayments() {
 
   return (
     <div className="space-y-8 max-w-7xl font-sans text-white relative">
-      
+
       {/* Header */}
       <div>
         <h1 className="text-3xl sm:text-4xl font-black tracking-tight flex items-center gap-3">
@@ -79,14 +110,14 @@ export default function AdminPayments() {
           Track and monitor all transactions across the platform.
         </p>
       </div>
-      
+
       {/* Search and Filters */}
       <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-white/[0.02] border border-white/5 rounded-2xl p-4 backdrop-blur-xl shadow-lg">
         <div className="relative w-full sm:max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
-          <input 
-            type="text" 
-            placeholder="Search by email or transaction ID..." 
+          <input
+            type="text"
+            placeholder="Search by email or transaction ID..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full bg-white/[0.03] border border-white/10 rounded-xl pl-12 pr-4 py-3 text-sm text-white outline-none focus:border-blue-500/50 focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all placeholder:text-gray-600"
@@ -132,15 +163,13 @@ export default function AdminPayments() {
                     })}
                   </td>
                   <td className="py-4 px-6 text-right">
-                    {payment.invoice?.pdfUrl ? (
-                      <a 
-                        href={`${import.meta.env.VITE_API_URL}${payment.invoice.pdfUrl}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1.5 rounded-lg transition-colors border border-blue-500/20"
+                    {payment.invoice?.invoiceNumber ? (
+                      <button
+                        onClick={() => downloadInvoice(payment.invoice.invoiceNumber)}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 px-3 py-1.5 rounded-lg transition-colors border border-blue-500/20 cursor-pointer"
                       >
                         <FileText size={14} /> PDF
-                      </a>
+                      </button>
                     ) : (
                       <span className="text-gray-500 text-xs font-medium px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 inline-flex">N/A</span>
                     )}

@@ -7,6 +7,37 @@ export default function StudentInvoices() {
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const downloadInvoice = async (invoiceId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`/api/invoice/${invoiceId}/download`, {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Invoice download failed");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${invoiceId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Invoice download error:", error);
+      alert("Unable to download invoice. Please try again.");
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,16 +107,14 @@ export default function StudentInvoices() {
                     ₹{invoice.amount}
                   </td>
                   <td className="py-4 px-6 text-right">
-                    {invoice.pdfUrl ? (
-                      <a 
-                        href={`${import.meta.env.VITE_API_URL}${invoice.pdfUrl}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 px-4 py-2 rounded-xl transition-colors border border-blue-500/20"
+                    {invoice.invoiceNumber ? (
+                      <button 
+                        onClick={() => downloadInvoice(invoice.invoiceNumber)}
+                        className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 px-4 py-2 rounded-xl transition-colors border border-blue-500/20 cursor-pointer"
                       >
                         <Download size={14} />
                         <span>PDF</span>
-                      </a>
+                      </button>
                     ) : (
                       <span className="text-gray-500 text-xs font-medium px-4 py-2 bg-white/5 rounded-xl border border-white/5 inline-flex">Not available</span>
                     )}

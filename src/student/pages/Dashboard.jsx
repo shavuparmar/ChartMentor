@@ -69,8 +69,8 @@ export default function StudentDashboard() {
         {/* Membership Status Card */}
         <div
           className={`relative overflow-hidden rounded-[2rem] border transition-all duration-500 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between min-h-[220px] group hover:scale-[1.01] ${isActive
-              ? 'bg-gradient-to-br from-blue-950/40 via-indigo-950/20 to-transparent border-blue-500/20 shadow-[0_0_50px_rgba(59,130,246,0.1)] hover:border-blue-500/40'
-              : 'bg-white/[0.02] border-white/5 shadow-2xl hover:bg-white/[0.04]'
+            ? 'bg-gradient-to-br from-blue-950/40 via-indigo-950/20 to-transparent border-blue-500/20 shadow-[0_0_50px_rgba(59,130,246,0.1)] hover:border-blue-500/40'
+            : 'bg-white/[0.02] border-white/5 shadow-2xl hover:bg-white/[0.04]'
             }`}
         >
           {/* Accent glow top-right */}
@@ -138,8 +138,8 @@ export default function StudentDashboard() {
                 onClick={() => handleJoin(channel.link)}
                 disabled={!isActive}
                 className={`w-full py-4 px-5 sm:px-6 rounded-2xl font-black text-xs uppercase tracking-[0.1em] transition-all duration-300 flex items-center justify-between gap-2.5 cursor-pointer ${isActive
-                    ? 'bg-indigo-600/10 hover:bg-indigo-600/30 border border-indigo-500/20 hover:border-indigo-500/40 text-indigo-300 hover:text-indigo-100 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(99,102,241,0.2)]'
-                    : 'bg-white/[0.02] text-gray-600 border border-white/5 cursor-not-allowed opacity-70'
+                  ? 'bg-indigo-600/10 hover:bg-indigo-600/30 border border-indigo-500/20 hover:border-indigo-500/40 text-indigo-300 hover:text-indigo-100 hover:-translate-y-0.5 hover:shadow-[0_10px_20px_rgba(99,102,241,0.2)]'
+                  : 'bg-white/[0.02] text-gray-600 border border-white/5 cursor-not-allowed opacity-70'
                   }`}
               >
                 <div className="flex items-center gap-3">
