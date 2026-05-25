@@ -112,19 +112,19 @@ export default function Footer() {
             {/* Left */}
             <div className="max-w-2xl">
               <p className="mb-4 text-[10px] font-black uppercase tracking-[0.35em] text-blue-400 sm:text-xs">
-                AB AAPKI BAARI HAI
+                NOW IT IS YOUR TURN
               </p>
 
               <h2 className="text-3xl font-black leading-tight sm:text-4xl lg:text-6xl">
-                Akele Mat Seekho.
+                Don't Learn Alone.
                 <br />
 
                 <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-                  Sahi Guidance Ke Saath
+                  Learn With Proper Guidance
                 </span>
 
                 <br />
-                Fast Grow Karo.
+                And Grow Faster.
               </h2>
 
               <p className="mt-6 max-w-xl text-sm leading-relaxed text-gray-300 sm:text-base">

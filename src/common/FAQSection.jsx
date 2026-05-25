@@ -4,25 +4,24 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    question: "Trading seekhne mein kitna time lagega?",
+    question: "How much time does it take to learn trading?",
     answer:
-      "Yeh aapki mehnat aur discipline par depend karta hai. Hamara roadmap 3 mahine mein aapko basics se advanced level tak le jaane ke liye design kiya gaya hai.",
+      "It depends entirely on your dedication and discipline. Our roadmap is designed to take you from basics to an advanced level within 3 months.",
   },
   {
-    question: "Kya mujhe bohot bade capital ki zaroorat hai?",
+    question: "Do I need a very large capital to start?",
     answer:
-      "Nahi, aap chote capital se seekhna shuru kar sakte hain. Pehle learning aur risk management par focus karein, capital gradually grow hoga.",
+      "No, you can start learning with a small capital. Focus primarily on learning and risk management first, and your capital will grow gradually.",
   },
   {
-    question: "Telegram group mein kya access milega?",
+    question: "What access will I get in the Telegram group?",
     answer:
-      "Aapko exclusive trade setups, daily analysis, premium learning resources aur mentor support milega.",
+      "You will receive exclusive trade setups, daily market analysis, premium learning resources, and continuous mentor support.",
   },
-
   {
-    question: "Live Learning sessions kab hote hain?",
+    question: "When are the live learning sessions held?",
     answer:
-      "Weekly live sessions conduct kiye jaate hain jahan market analysis aur doubt solving hota hai. Recordings bhi available rehti hain.",
+      "We conduct weekly live sessions focusing on market analysis and doubt solving. Recordings of these sessions are also provided.",
   },
 ];
 
@@ -68,8 +67,7 @@ export default function FAQSection() {
 
           {/* Description */}
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 sm:text-lg">
-            Trading mentorship aur membership related sabhi important
-            questions ke answers yahan available hain.
+            Find answers to all important questions related to trading mentorship and our membership program below.
           </p>
         </motion.div>
 
@@ -174,7 +172,7 @@ export default function FAQSection() {
               </h3>
 
               <p className="mt-2 max-w-md text-sm leading-relaxed text-gray-400">
-                Hamari support team se connect karke apne doubts clear karein.
+                Connect with our support team to get your doubts cleared.
               </p>
             </div>
 

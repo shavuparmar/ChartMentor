@@ -26,11 +26,7 @@ const benefits = [
     title: "Study Material & PDFs",
     desc: "Premium resources, notes & trading guides.",
   },
-  {
-    icon: LineChart,
-    title: "Trade Setups & Analysis",
-    desc: "High probability setups with clear analysis.",
-  },
+
   {
     icon: MessageCircleQuestion,
     title: "Q&A & Doubt Support",

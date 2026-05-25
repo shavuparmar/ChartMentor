@@ -17,13 +17,9 @@ const MembershipFeatures = () => {
     {
       icon: <BarChart3 className="w-8 h-8 text-blue-500" />,
       title: "Daily Market Analysis",
-      desc: "Next day market prediction & analysis"
+      desc: "Next day market breakdown & analysis"
     },
-    {
-      icon: <TrendingUp className="w-8 h-8 text-blue-500" />,
-      title: "High Probability Setups",
-      desc: "Best setups with proper entry, SL & Target"
-    },
+
     {
       icon: <MessagesSquare className="w-8 h-8 text-blue-500" />,
       title: "Live Doubt Sessions",
@@ -32,12 +28,12 @@ const MembershipFeatures = () => {
     {
       icon: <UserRoundCheck className="w-8 h-8 text-blue-500" />,
       title: "Personal Guidance",
-      desc: "Direct support from me and team"
+      desc: "Direct support from mentors and team"
     },
     {
       icon: <Map className="w-8 h-8 text-blue-500" />,
       title: "Roadmap & Learning",
-      desc: "Step by step roadmap for consistent growth"
+      desc: "Step-by-step roadmap for consistent growth"
     },
     {
       icon: <BrainCircuit className="w-8 h-8 text-blue-500" />,
@@ -59,7 +55,7 @@ const MembershipFeatures = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <p className="text-blue-500 uppercase tracking-[0.2em] text-xs font-bold mb-4">
-            KYU CHOOSE KARE
+            WHY CHOOSE
           </p>
           <h2 className="text-3xl md:text-5xl font-bold">
             Chart Mentor Membership?

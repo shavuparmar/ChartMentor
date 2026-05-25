@@ -13,21 +13,21 @@ const steps = [
     icon: UserPlus,
     title: "Join Membership",
     description:
-      "Plan choose karo aur secure payment complete karke instantly community ka part bano.",
+      "Choose a plan and complete the secure payment to instantly become a part of the community.",
   },
   {
     id: "02",
     icon: ShieldCheck,
     title: "Get Instant Access",
     description:
-      "Telegram premium group, live sessions aur study materials ka immediate access milega.",
+      "Get immediate access to the premium Telegram group, live sessions, and study materials.",
   },
   {
     id: "03",
     icon: TrendingUp,
     title: "Learn & Grow",
     description:
-      "Daily guidance follow karo, discipline build karo aur consistent profitable trader bano.",
+      "Follow the daily guidance, build discipline, and become a consistent and focused trader.",
   },
 ];
 
@@ -70,8 +70,7 @@ export default function HowItWorks() {
 
           {/* Description */}
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 sm:text-lg">
-            Simple process follow karo aur trading journey ko
-            next level par le jao with proper mentorship.
+            Follow this simple process and take your trading journey to the next level with proper mentorship.
           </p>
         </motion.div>
 
@@ -153,7 +152,7 @@ export default function HowItWorks() {
           viewport={{ once: true }}
           className="mt-20 flex justify-center"
         >
-          <button 
+          <button
             onClick={() => {
               if (user) {
                 navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');

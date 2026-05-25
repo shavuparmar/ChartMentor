@@ -266,10 +266,7 @@ export default function PricingSection() {
               </h3>
 
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-300">
-                Agar aapko 7 days ke andar membership useful ya worth it nahi
-                lagti, to aap refund request submit kar sakte hain.
-                Refund eligibility platform terms and conditions ke according
-                process ki jayegi.
+                If you do not find the membership useful or worth it within the first 7 days, you can submit a refund request. Refund eligibility will be processed according to the platform's terms and conditions.
                 <span className="ml-1 font-semibold text-yellow-400">
                   (T&amp;C Apply)
                 </span>

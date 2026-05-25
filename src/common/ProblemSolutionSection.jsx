@@ -10,12 +10,12 @@ import {
 
 const ProblemSolution = () => {
   const problems = [
-    "YouTube Videos se Confusion badh raha hai",
-    "Expensive Courses but no proper guidance",
-    "Doubts hote hain, Lekin clear krne wala koi nhi",
-    "Consistency maintain nahi ho pa rahi",
-    "Losses ho rahe hain, reason samajh nahi aa raha",
-    "Right strategy hai, but execution wrong",
+    "YouTube videos increasing your confusion",
+    "Expensive courses but no proper guidance",
+    "Having doubts, but no one to clear them",
+    "Unable to maintain trading consistency",
+    "Taking losses without understanding the reason",
+    "Having the right strategy, but wrong execution",
   ];
 
   const solutions = [
@@ -49,19 +49,18 @@ const ProblemSolution = () => {
         >
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.3em] text-red-300 backdrop-blur-xl">
             <TrendingDown className="h-4 w-4" />
-            PROBLEM HAR TRADER KI SAME HOTI HAI
+            EVERY TRADER FACES THESE CHALLENGES
           </div>
 
           <h2 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-7xl">
-            Kya Aap In Problems Se
+            Are You Also Facing
             <span className="mt-3 block bg-gradient-to-r from-red-400 to-orange-300 bg-clip-text text-transparent">
-              Face kar Rahe Ho?
+              These Common Issues?
             </span>
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 sm:text-lg">
-            Trading seekhna easy lagta hai, lekin bina proper guidance ke
-            confusion, losses aur inconsistency sabko face karni padti hai.
+            Learning to trade might seem easy, but without proper guidance, everyone eventually faces confusion, unexpected losses, and inconsistency.
           </p>
         </motion.div>
 

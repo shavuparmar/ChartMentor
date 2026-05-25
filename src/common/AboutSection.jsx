@@ -36,7 +36,7 @@ export default function AboutSection() {
           </div>
 
           <h2 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-7xl">
-            Main Kaun Hu?
+            Who Am I?
           </h2>
         </motion.div>
 
@@ -105,9 +105,9 @@ export default function AboutSection() {
 
             {/* HEADING */}
             <h3 className="text-3xl font-black leading-tight tracking-tight sm:text-5xl">
-              Trading Journey
+              Real Learning From My
               <span className="mt-2 block bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-                Se Real Learning
+                Trading Journey
               </span>
             </h3>
 
@@ -115,33 +115,26 @@ export default function AboutSection() {
             <div className="mt-8 space-y-6 text-base leading-relaxed text-gray-300 sm:text-lg">
 
               <p>
-                Mera naam {""}
+                My name is {""}
                 <span className="font-bold text-white">
                   Arun
                 </span> {"Gupta"}
-                hai aur pichhle 5+ saalon se main actively trading kar raha hu.
+                and I have been actively trading for over 5+ years.
               </p>
 
               <p>
-                Maine khud bohot losses dekhe, emotional mistakes ki,
-                strategies change ki aur market ko deeply samjha.
-                Aaj main disciplined aur consistently profitable
-                trading approach follow karta hu.
+                I have faced numerous losses, made emotional mistakes, constantly changed strategies, and eventually understood the market deeply. Today, I follow a highly disciplined and consistent trading approach.
               </p>
 
               {/* QUOTE CARD */}
               <div className="rounded-3xl border border-blue-500/10 bg-blue-500/[0.05] p-6 backdrop-blur-xl">
                 <p className="text-lg italic leading-relaxed text-gray-200">
-                  “Mera mission hai ki jo galtiyan maine ki,
-                  wo aap na karein. Aapka time, paisa aur
-                  energy dono bache.”
+                  “My mission is to ensure you don't repeat the mistakes I made, saving your valuable time, money, and energy.”
                 </p>
               </div>
 
               <p>
-                Chart Mentor sirf ek trading community nahi hai —
-                yeh ek complete mentorship ecosystem hai jahan
-                aapko roadmap, support aur real guidance milti hai.
+                Chart Mentor is not just a trading community — it is a complete mentorship ecosystem where you get a clear roadmap, reliable support, and genuine guidance.
               </p>
             </div>
 
