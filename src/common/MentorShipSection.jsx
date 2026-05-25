@@ -43,7 +43,7 @@ const MembershipFeatures = () => {
   ];
 
   const stats = [
-    { icon: <Users className="w-6 h-6" />, value: "2000+", label: "Happy Members" },
+    { icon: <Users className="w-6 h-6" />, value: "3325+", label: "Happy Members" },
     { icon: <Video className="w-6 h-6" />, value: "200+", label: "Live Sessions" },
     { icon: <Smile className="w-6 h-6" />, value: "95%", label: "Satisfaction Rate" },
     { icon: <Clock className="w-6 h-6" />, value: "5+ Years", label: "Of Experience" }

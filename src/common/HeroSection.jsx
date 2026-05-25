@@ -140,7 +140,7 @@ export default function HeroSection() {
             {/* TEXT */}
             <div>
               <p className="text-sm font-bold text-white sm:text-base">
-                Trusted by 3000+ Traders
+                Trusted by 3500+ Traders
               </p>
 
               <p className="mt-1 text-xs text-gray-400 sm:text-sm">

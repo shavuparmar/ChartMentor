@@ -118,7 +118,7 @@ export default function AboutSection() {
                 My name is {""}
                 <span className="font-bold text-white">
                   Arun
-                </span> {"Gupta"}
+                </span> {"Gupta "}
                 and I have been actively trading for over 5+ years.
               </p>
 
@@ -143,7 +143,7 @@ export default function AboutSection() {
 
               <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl">
                 <h4 className="text-3xl font-black text-blue-400">
-                  3200+
+                  3500+
                 </h4>
 
                 <p className="mt-2 text-sm uppercase tracking-wide text-gray-400">
