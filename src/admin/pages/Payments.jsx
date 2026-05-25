@@ -10,29 +10,44 @@ export default function AdminPayments() {
 
   const downloadInvoice = async (invoiceId) => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`/api/invoice/${invoiceId}/download`, {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/invoice/${invoiceId}/download`, {
         method: "GET",
         headers: {
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
       });
 
+      const contentType = response.headers.get("content-type");
+
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Invoice download failed:", errorText);
         throw new Error("Invoice download failed");
       }
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      if (!contentType || !contentType.includes("application/pdf")) {
+        const errorText = await response.text();
+        console.error("Expected PDF but received:", contentType, errorText);
+        throw new Error("Invalid PDF response");
+      }
 
+      const blob = await response.blob();
+
+      if (blob.size === 0) {
+        throw new Error("Downloaded PDF is empty");
+      }
+
+      const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
       a.download = `${invoiceId}.pdf`;
       document.body.appendChild(a);
       a.click();
-
       a.remove();
       window.URL.revokeObjectURL(url);
+
     } catch (error) {
       console.error("Invoice download error:", error);
       alert("Unable to download invoice. Please try again.");
