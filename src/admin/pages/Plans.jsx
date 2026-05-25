@@ -24,7 +24,8 @@ export default function AdminPlans() {
     endDate: '',
     membershipType: '',
     isActive: true,
-    isVisible: true
+    isVisible: true,
+    features: []
   };
 
   const [newPlan, setNewPlan] = useState(initialPlanState);
@@ -59,6 +60,7 @@ export default function AdminPlans() {
         durationDays: newPlan.durationDays ? Number(newPlan.durationDays) : null,
         startDate: newPlan.startDate || null,
         endDate: newPlan.endDate || null,
+        features: newPlan.features.filter(f => f.trim() !== '')
       };
 
       if (newPlan.startDate) {
@@ -149,7 +151,8 @@ export default function AdminPlans() {
       endDate: plan.endDate ? plan.endDate.split('T')[0] : '',
       membershipType: plan.membershipType || '',
       isActive: plan.isActive ?? true,
-      isVisible: plan.isVisible ?? true
+      isVisible: plan.isVisible ?? true,
+      features: plan.features || []
     });
     setShowModal(true);
   };
@@ -472,6 +475,53 @@ export default function AdminPlans() {
                     <p className="text-xs text-amber-400/80 leading-relaxed">
                       Visibility controls if users can see it. Active controls if they can purchase it.
                     </p>
+                  </div>
+
+                  {/* Features Section */}
+                  <div className="space-y-3 pt-2">
+                    <div className="flex items-center justify-between">
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-300">Features Included</label>
+                      <button
+                        type="button"
+                        onClick={() => setNewPlan({ ...newPlan, features: [...newPlan.features, ''] })}
+                        className="text-xs font-bold uppercase tracking-wider text-indigo-400 hover:text-indigo-300 flex items-center gap-1 bg-indigo-500/10 hover:bg-indigo-500/20 px-3 py-1.5 rounded-lg transition-colors"
+                      >
+                        <Plus className="w-3.5 h-3.5" /> Add Feature
+                      </button>
+                    </div>
+                    {newPlan.features.length === 0 ? (
+                      <div className="text-xs text-gray-500 p-4 border border-white/5 rounded-xl bg-white/[0.02] text-center">
+                        No features added yet. Click "Add Feature" to start.
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        {newPlan.features.map((feature, index) => (
+                          <div key={index} className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              value={feature}
+                              onChange={(e) => {
+                                const updatedFeatures = [...newPlan.features];
+                                updatedFeatures[index] = e.target.value;
+                                setNewPlan({ ...newPlan, features: updatedFeatures });
+                              }}
+                              className="flex-1 bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white outline-none focus:border-indigo-500/50 focus:bg-white/[0.05] transition-all placeholder:text-gray-600"
+                              placeholder={`Feature ${index + 1} (e.g. Daily Market Analysis)`}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updatedFeatures = newPlan.features.filter((_, i) => i !== index);
+                                setNewPlan({ ...newPlan, features: updatedFeatures });
+                              }}
+                              className="p-2.5 rounded-xl border border-red-500/20 text-red-400 hover:bg-red-500/10 transition-colors flex-shrink-0"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="pt-4 flex justify-end gap-3">

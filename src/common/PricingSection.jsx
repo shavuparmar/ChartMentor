@@ -13,16 +13,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-const features = [
-  "Daily Market Analysis",
-  "Trading Roadmap",
-  "High Probability Setups",
-  "Risk Management",
-  "Live Doubt Sessions",
-  "Mindset & Discipline",
-  "Personal Guidance & Support",
-  "Premium Community Access",
-];
+
 
 export default function PricingSection() {
   const [plans, setPlans] = useState([]);
@@ -50,6 +41,13 @@ export default function PricingSection() {
       navigate(`/login?redirect=/student/dashboard`);
     }
   };
+
+  // Compute all unique features across all active plans for the "Everything Included" section
+  const allFeatures = Array.from(new Set(
+    plans.filter(p => p.isActive !== false && p.isVisible !== false)
+         .flatMap(p => p.features || [])
+  ));
+
   return (
     <section
       id="pricing"
@@ -167,20 +165,23 @@ export default function PricingSection() {
 
                 {/* FEATURES */}
                 <div className="mt-10 space-y-4">
-                  {(plan.features?.length > 0 ? plan.features : features.slice(0, 5)).map((feature, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3"
-                    >
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
-                        <Check className="h-4 w-4" />
+                  {plan.features && plan.features.length > 0 ? (
+                    plan.features.map((feature, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-3"
+                      >
+                        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
+                          <Check className="h-4 w-4" />
+                        </div>
+                        <span className="text-sm text-gray-300 sm:text-base">
+                          {feature}
+                        </span>
                       </div>
-
-                      <span className="text-sm text-gray-300 sm:text-base">
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
+                    ))
+                  ) : (
+                    <div className="text-sm text-gray-500 italic">No specific features listed.</div>
+                  )}
                 </div>
 
                 {/* BUTTON */}
@@ -223,12 +224,12 @@ export default function PricingSection() {
 
           {/* FEATURES GRID */}
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {features.map((feature, index) => (
+            {allFeatures.length > 0 ? allFeatures.map((feature, index) => (
               <div
                 key={index}
                 className="group flex items-center gap-3 rounded-2xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:border-blue-500/20 hover:bg-blue-500/[0.04]"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/10 text-blue-400 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
                   <Check className="h-4 w-4" />
                 </div>
 
@@ -236,7 +237,11 @@ export default function PricingSection() {
                   {feature}
                 </span>
               </div>
-            ))}
+            )) : (
+              <div className="col-span-full text-center py-8">
+                <p className="text-gray-500 text-sm">Features will be listed here once added to membership plans.</p>
+              </div>
+            )}
           </div>
         </motion.div>
 

@@ -79,13 +79,13 @@ export default function StudentSettings() {
   const isActive = membership?.status === 'ACTIVE';
 
   return (
-    <div className="space-y-8 max-w-6xl font-sans text-white">
+    <div className="space-y-8 max-w-6xl font-sans text-white animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
       <div>
-        <h1 className="text-3xl sm:text-4xl font-black tracking-tight flex items-center gap-3">
-          <User className="w-8 h-8 text-blue-400" />
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight flex items-center gap-4 leading-tight">
+          <User className="w-8 h-8 sm:w-10 sm:h-10 text-blue-400" />
           My Profile
         </h1>
-        <p className="text-gray-400 mt-2 text-sm sm:text-base">
+        <p className="text-gray-400 mt-3 text-sm sm:text-base max-w-2xl leading-relaxed">
           Manage your personal information, membership status, and security.
         </p>
       </div>
@@ -96,12 +96,14 @@ export default function StudentSettings() {
         <div className="lg:col-span-1 space-y-8">
           
           {/* Identity Card */}
-          <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-xl p-8 relative">
+          <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-xl p-6 sm:p-8 relative group hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500">
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full pointer-events-none" />
             
             <div className="flex flex-col items-center text-center">
-              {/* Note: Removed avatar as requested */}
-              <h2 className="text-2xl font-black tracking-tight text-white mb-1">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-4xl font-black text-white shadow-xl mb-5 border-4 border-[#0a0f1c] ring-2 ring-white/10 group-hover:scale-105 transition-transform duration-500">
+                {profile.firstName[0]?.toUpperCase()}{profile.lastName[0]?.toUpperCase()}
+              </div>
+              <h2 className="text-2xl font-black tracking-tight text-white mb-2">
                 {profile.firstName} {profile.lastName}
               </h2>
               <div className="inline-flex items-center gap-1.5 text-gray-400 text-sm mb-6 bg-white/[0.03] px-3 py-1.5 rounded-full border border-white/5">
@@ -123,10 +125,10 @@ export default function StudentSettings() {
           </div>
 
           {/* Membership Status Card */}
-          <div className={`relative overflow-hidden rounded-[2rem] border transition-all duration-500 backdrop-blur-xl p-8 flex flex-col justify-between ${
+          <div className={`relative overflow-hidden rounded-[2rem] border transition-all duration-500 backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between group hover:scale-[1.01] ${
               isActive 
-                ? 'bg-gradient-to-br from-indigo-950/40 via-purple-950/20 to-transparent border-indigo-500/20 shadow-[0_0_50px_rgba(99,102,241,0.1)]' 
-                : 'bg-white/[0.02] border-white/5 shadow-2xl'
+                ? 'bg-gradient-to-br from-indigo-950/40 via-purple-950/20 to-transparent border-indigo-500/20 shadow-[0_0_50px_rgba(99,102,241,0.1)] hover:border-indigo-500/40' 
+                : 'bg-white/[0.02] border-white/5 shadow-2xl hover:bg-white/[0.04]'
             }`}
           >
             {isActive && (
@@ -169,18 +171,18 @@ export default function StudentSettings() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Security & Password */}
-          <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-8 shadow-2xl backdrop-blur-xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2.5 bg-blue-500/10 rounded-xl border border-blue-500/20 text-blue-400">
-                <KeyRound className="w-5 h-5" />
+          <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-6 sm:p-8 shadow-2xl backdrop-blur-xl group hover:border-white/10 transition-all duration-500">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-blue-500/10 rounded-xl border border-blue-500/20 text-blue-400">
+                <KeyRound className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h2 className="text-xl font-bold tracking-tight text-white">Security Settings</h2>
-                <p className="text-xs text-gray-400 uppercase tracking-wider mt-1">Change your password</p>
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Security Settings</h2>
+                <p className="text-xs text-gray-400 uppercase tracking-wider mt-1.5">Change your password</p>
               </div>
             </div>
 
-            <form onSubmit={handleUpdatePassword} className="space-y-5 max-w-lg">
+            <form onSubmit={handleUpdatePassword} className="space-y-6 max-w-lg">
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-300">Current Password</label>
                 <div className="flex items-center bg-white/[0.03] border border-white/10 rounded-2xl px-4 focus-within:border-blue-500/50 focus-within:bg-white/[0.05] focus-within:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300">
@@ -224,11 +226,11 @@ export default function StudentSettings() {
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-4">
                 <button 
                   type="submit"
                   disabled={submitting}
-                  className="px-8 py-3.5 rounded-xl bg-white text-black hover:bg-gray-200 font-bold text-sm uppercase tracking-wide hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50"
+                  className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-sm uppercase tracking-widest shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {submitting ? 'Updating...' : 'Update Password'}
                 </button>
@@ -237,14 +239,14 @@ export default function StudentSettings() {
           </div>
 
           {/* Accessible Channels */}
-          <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-8 shadow-2xl backdrop-blur-xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2.5 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-emerald-400">
-                <Send className="w-5 h-5" />
+          <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-6 sm:p-8 shadow-2xl backdrop-blur-xl group hover:border-white/10 transition-all duration-500">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-emerald-400">
+                <Send className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h2 className="text-xl font-bold tracking-tight text-white">Accessible Channels</h2>
-                <p className="text-xs text-gray-400 uppercase tracking-wider mt-1">Included in your plan</p>
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Accessible Channels</h2>
+                <p className="text-xs text-gray-400 uppercase tracking-wider mt-1.5">Included in your plan</p>
               </div>
             </div>
 
@@ -263,33 +265,33 @@ export default function StudentSettings() {
           </div>
 
           {/* Payment History */}
-          <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-8 shadow-2xl backdrop-blur-xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2.5 bg-indigo-500/10 rounded-xl border border-indigo-500/20 text-indigo-400">
-                <CreditCard className="w-5 h-5" />
+          <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-6 sm:p-8 shadow-2xl backdrop-blur-xl group hover:border-white/10 transition-all duration-500">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-indigo-500/10 rounded-xl border border-indigo-500/20 text-indigo-400">
+                <CreditCard className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h2 className="text-xl font-bold tracking-tight text-white">Payment History</h2>
-                <p className="text-xs text-gray-400 uppercase tracking-wider mt-1">Recent transactions</p>
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Payment History</h2>
+                <p className="text-xs text-gray-400 uppercase tracking-wider mt-1.5">Recent transactions ledger</p>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {profile.payments && profile.payments.length > 0 ? profile.payments.map(payment => (
-                <div key={payment.id} className="flex justify-between items-center p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
-                  <div className="flex flex-col gap-1">
-                    <span className="font-bold text-white">{payment.plan?.name || 'Lifetime Plan'}</span>
-                    <span className="text-xs text-gray-400 flex items-center gap-1"><Calendar className="w-3 h-3" /> {new Date(payment.createdAt).toLocaleDateString()}</span>
+                <div key={payment.id} className="flex justify-between items-center p-4 sm:p-5 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all hover:scale-[1.01] hover:border-white/10 shadow-lg">
+                  <div className="flex flex-col gap-1.5">
+                    <span className="font-bold text-white text-sm sm:text-base">{payment.plan?.name || 'Lifetime Plan'}</span>
+                    <span className="text-xs text-gray-400 flex items-center gap-1.5 opacity-80"><Calendar className="w-3.5 h-3.5" /> {new Date(payment.createdAt).toLocaleDateString()}</span>
                   </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <span className="font-bold text-white">₹{payment.amount}</span>
-                    <span className={`text-[10px] font-bold uppercase tracking-wider ${payment.status === 'SUCCESS' ? 'text-emerald-400' : 'text-amber-400'}`}>
+                  <div className="flex flex-col items-end gap-2">
+                    <span className="font-black text-white text-base sm:text-lg">₹{payment.amount}</span>
+                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${payment.status === 'SUCCESS' ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10 shadow-[0_0_10px_rgba(16,185,129,0.1)]' : 'text-amber-400 border-amber-500/30 bg-amber-500/10 shadow-[0_0_10px_rgba(245,158,11,0.1)]'}`}>
                       {payment.status}
                     </span>
                   </div>
                 </div>
               )) : (
-                <div className="text-sm text-gray-500 py-4 border border-white/5 rounded-xl bg-white/[0.01] px-4">
+                <div className="text-sm text-gray-500 py-6 text-center border border-white/5 rounded-2xl bg-white/[0.01] px-4">
                   No payment history found.
                 </div>
               )}

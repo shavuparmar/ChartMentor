@@ -8,7 +8,7 @@ export default function PaymentStatus() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [status, setStatus] = useState('verifying');
-  const orderId = searchParams.get('orderId') || searchParams.get('client_txn_id');
+  const orderId = searchParams.get('cmOrderId') || searchParams.get('orderId') || searchParams.get('client_txn_id');
 
   useEffect(() => {
     if (!orderId) {

@@ -50,17 +50,35 @@ export default function AdminChannels() {
 
   const handleCreateOrUpdate = async (e) => {
     e.preventDefault();
+    
+    let url = newChannel.link.trim();
+    if (!url) {
+      toast.error("Link is required");
+      return;
+    }
+    if (!/^https?:\/\//i.test(url)) {
+      url = 'https://' + url;
+    }
+    try {
+      new URL(url);
+    } catch (err) {
+      toast.error("Please enter a valid URL");
+      return;
+    }
+
+    const payload = { ...newChannel, link: url };
+
     setSubmitting(true);
     try {
       const token = localStorage.getItem('token');
       
       if (editingChannel) {
-        await axios.put(`${import.meta.env.VITE_API_URL}/api/channel/${editingChannel.id}`, newChannel, {
+        await axios.put(`${import.meta.env.VITE_API_URL}/api/channel/${editingChannel.id}`, payload, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('Channel updated successfully');
       } else {
-        await axios.post(`${import.meta.env.VITE_API_URL}/api/channel`, newChannel, {
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/channel`, payload, {
           headers: { Authorization: `Bearer ${token}` }
         });
         toast.success('Channel created successfully');
@@ -176,30 +194,43 @@ export default function AdminChannels() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           {channels.map(channel => (
-            <div key={channel.id} className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors relative">
+            <div key={channel.id} className={`p-6 rounded-2xl border transition-all duration-300 relative ${channel.isActive ? 'border-white/5 bg-white/[0.02] hover:bg-white/[0.04]' : 'border-white/5 bg-white/[0.01] opacity-75'}`}>
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-lg font-bold text-white">{channel.name}</h3>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-lg font-bold text-white">{channel.name}</h3>
+                    {!channel.isActive && <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400">INACTIVE</span>}
+                    {!channel.isVisible && <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-gray-500/20 text-gray-400">HIDDEN</span>}
+                  </div>
                   <span className="text-xs text-indigo-400 font-bold uppercase tracking-wider">{channel.type}</span>
                 </div>
                 <div className="flex gap-1.5">
-                  <button onClick={() => toggleStatus(channel, 'isVisible')} className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors" title="Toggle Visibility">
+                  <button onClick={() => toggleStatus(channel, 'isVisible')} className={`p-1.5 rounded-lg transition-colors ${channel.isVisible ? 'bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'}`} title={channel.isVisible ? "Hide Channel" : "Show Channel"}>
                     {channel.isVisible ? <Eye className="w-4 h-4 text-blue-400" /> : <EyeOff className="w-4 h-4" />}
                   </button>
-                  <button onClick={() => toggleStatus(channel, 'isActive')} className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors" title="Toggle Active Status">
-                    {channel.isActive ? <PowerOff className="w-4 h-4" /> : <Power className="w-4 h-4 text-emerald-400" />}
+                  <button onClick={() => toggleStatus(channel, 'isActive')} className={`p-1.5 rounded-lg transition-colors ${channel.isActive ? 'bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white' : 'bg-red-500/10 text-red-400 hover:bg-red-500/20'}`} title={channel.isActive ? "Deactivate Channel" : "Activate Channel"}>
+                    {channel.isActive ? <Power className="w-4 h-4 text-emerald-400" /> : <PowerOff className="w-4 h-4" />}
                   </button>
-                  <button onClick={() => openEditModal(channel)} className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+                  <button onClick={() => openEditModal(channel)} className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors" title="Edit Channel">
                     <Edit2 className="w-4 h-4" />
                   </button>
-                  <button onClick={() => handleDelete(channel.id)} className="p-1.5 rounded-lg bg-white/5 hover:bg-red-500/10 text-gray-400 hover:text-red-400 transition-colors">
+                  <button onClick={() => handleDelete(channel.id)} className="p-1.5 rounded-lg bg-white/5 hover:bg-red-500/10 text-gray-400 hover:text-red-400 transition-colors" title="Delete Channel">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>
-              <p className="text-sm text-gray-400 mb-4 truncate">{channel.link}</p>
-              <div className="text-xs text-gray-500">
-                Assigned Plans: {channel.planIds.length > 0 ? channel.planIds.length : 'All Plans'}
+              <a 
+                href={channel.link.startsWith('http') ? channel.link : `https://${channel.link}`} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 mb-4 truncate transition-colors max-w-full"
+                title="Open Link"
+              >
+                <LinkIcon className="w-4 h-4 flex-shrink-0" />
+                <span className="truncate">{channel.link}</span>
+              </a>
+              <div className="text-xs text-gray-500 flex items-center justify-between">
+                <span>Assigned Plans: {channel.planIds.length > 0 ? channel.planIds.length : 'All Plans'}</span>
               </div>
             </div>
           ))}
@@ -257,8 +288,11 @@ export default function AdminChannels() {
                         className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-indigo-500/50 appearance-none"
                       >
                         <option value="Telegram" className="bg-gray-900">Telegram</option>
-                        <option value="Discord" className="bg-gray-900">Discord</option>
                         <option value="WhatsApp" className="bg-gray-900">WhatsApp</option>
+                        <option value="Discord" className="bg-gray-900">Discord</option>
+                        <option value="Instagram" className="bg-gray-900">Instagram</option>
+                        <option value="YouTube" className="bg-gray-900">YouTube</option>
+                        <option value="Twitter/X" className="bg-gray-900">Twitter/X</option>
                         <option value="Other" className="bg-gray-900">Other</option>
                       </select>
                     </div>

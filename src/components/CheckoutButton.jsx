@@ -83,7 +83,7 @@ export default function CheckoutButton({ amount, planId, className = "" }) {
           <img src={qrCode} alt="UPI QR Code" className="w-48 h-48 mx-auto bg-white p-2 rounded-lg" />
           <p className="text-xs text-gray-500 mt-4">Order ID: {orderId}</p>
           <button 
-            onClick={() => window.location.href = `/payment/status?orderId=${orderId}`}
+            onClick={() => window.location.href = `/payment/status?cmOrderId=${orderId}`}
             className="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs uppercase tracking-wide rounded-lg transition-colors w-full"
           >
             I have paid
