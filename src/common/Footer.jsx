@@ -50,33 +50,50 @@ export default function Footer() {
   const navigate = useNavigate();
 
   const handleLinkClick = (e, path) => {
-    if (path.startsWith("/")) {
-      const sectionId = path === "/" ? "home" : path.replace("/", "");
-      const section = document.getElementById(sectionId);
-      if (section) {
-        e.preventDefault();
-        section.scrollIntoView({ behavior: "smooth" });
-      } else {
-        e.preventDefault();
-        navigate("/");
-        setTimeout(() => {
-          const targetSection = document.getElementById(sectionId);
-          if (targetSection) {
-            targetSection.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 100);
-      }
+    if (!path.startsWith("/")) return;
+
+    const sectionId = path === "/" ? "home" : path.replace("/", "");
+
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      e.preventDefault();
+
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      return;
     }
+
+    e.preventDefault();
+
+    navigate("/");
+
+    setTimeout(() => {
+      const targetSection = document.getElementById(sectionId);
+
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 300);
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#030712] text-white">
-      {/* Background Glow */}
-      <div className="absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-blue-600/10 blur-[140px]" />
-      <div className="absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-indigo-600/10 blur-[120px]" />
+    <footer className="relative overflow-hidden border-t border-white/5 bg-[#030712] text-white">
+
+      {/* Background Effects */}
+      <div className="pointer-events-none absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-blue-600/10 blur-[140px]" />
+
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-indigo-600/10 blur-[120px]" />
 
       {/* CTA SECTION */}
-      <div className="relative z-20 mx-auto max-w-7xl px-5 pt-20 lg:px-10">
+      <div className="relative z-20 mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 lg:pt-20">
+
         <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl">
 
           {/* Background Image */}
@@ -87,42 +104,45 @@ export default function Footer() {
               className="h-full w-full object-cover object-center opacity-20 lg:opacity-40"
             />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#030712] via-[#030712]/90 to-[#030712]/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#030712] via-[#030712]/90 to-[#030712]/40" />
           </div>
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col gap-10 px-6 py-14 md:px-12 lg:flex-row lg:items-center lg:justify-between lg:px-16 lg:py-20">
+          <div className="relative z-10 flex flex-col gap-10 px-6 py-12 sm:px-8 md:px-12 lg:flex-row lg:items-center lg:justify-between lg:px-16 lg:py-20">
 
-            {/* Left */}
+            {/* Left Content */}
             <div className="max-w-2xl">
-              <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-blue-400">
+              <p className="mb-4 text-[10px] font-black uppercase tracking-[0.35em] text-blue-400 sm:text-xs">
                 AB AAPKI BAARI HAI
               </p>
 
-              <h2 className="text-3xl font-black leading-tight sm:text-5xl lg:text-6xl">
+              <h2 className="text-3xl font-black leading-tight sm:text-4xl lg:text-6xl">
                 Akele Mat Seekho.
                 <br />
+
                 <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
                   Sahi Guidance Ke Saath
                 </span>
+
                 <br />
                 Fast Grow Karo.
               </h2>
 
               <p className="mt-6 max-w-xl text-sm leading-relaxed text-gray-300 sm:text-base">
                 Join India’s fast growing trading mentorship community and
-                learn professional trading with real guidance and live support.
+                learn professional trading with real guidance, live sessions,
+                and a supportive trader network.
               </p>
             </div>
 
-            {/* Right Button */}
-            <div className="flex lg:justify-end">
+            {/* CTA Button */}
+            <div className="flex w-full lg:w-auto lg:justify-end">
               <button
                 onClick={(e) => handleLinkClick(e, "/membership")}
-                className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.35)] cursor-pointer"
+                className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.18em] text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(59,130,246,0.35)] active:scale-[0.98] sm:w-auto cursor-pointer"
               >
                 JOIN NOW
+
                 <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </button>
             </div>
@@ -131,7 +151,8 @@ export default function Footer() {
       </div>
 
       {/* MAIN FOOTER */}
-      <div className="relative z-10 mx-auto mt-24 max-w-7xl px-5 pb-10 lg:px-10">
+      <div className="relative z-10 mx-auto mt-20 max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+
         <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-4">
 
           {/* Brand */}
@@ -141,10 +162,10 @@ export default function Footer() {
                 CHART
               </h2>
 
-              <div className="mt-1 flex items-center gap-2">
+              <div className="mt-2 flex items-center gap-2">
                 <div className="h-[2px] w-5 bg-blue-500" />
 
-                <span className="text-xs font-bold uppercase tracking-[0.4em] text-gray-400">
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
                   MENTOR
                 </span>
 
@@ -154,10 +175,11 @@ export default function Footer() {
 
             <p className="max-w-sm text-sm leading-relaxed text-gray-400">
               Helping traders learn, grow, and become consistently profitable
-              with professional mentorship and community support.
+              with professional mentorship, expert guidance, and community
+              support.
             </p>
 
-            {/* Social */}
+            {/* Social Icons */}
             <div className="mt-8 flex flex-wrap gap-4">
               {socialLinks.map((social, i) => {
                 const Icon = social.icon;
@@ -168,6 +190,7 @@ export default function Footer() {
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Social Link ${i + 1}`}
                     className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-gray-300 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:bg-blue-600 hover:text-white"
                   >
                     <Icon className="text-lg" />
@@ -192,6 +215,7 @@ export default function Footer() {
                     className="group inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-all duration-300 hover:text-blue-400"
                   >
                     <span className="h-[2px] w-0 bg-blue-500 transition-all duration-300 group-hover:w-4" />
+
                     {link.name}
                   </Link>
                 </li>
@@ -213,6 +237,7 @@ export default function Footer() {
                     className="group inline-flex items-center gap-2 text-sm font-medium text-gray-400 transition-all duration-300 hover:text-blue-400"
                   >
                     <span className="h-[2px] w-0 bg-blue-500 transition-all duration-300 group-hover:w-4" />
+
                     {link.name}
                   </Link>
                 </li>
@@ -227,25 +252,28 @@ export default function Footer() {
             </h3>
 
             <div className="space-y-5">
+
+              {/* Email */}
               <a
-                href="mailto:hello@chartmentor.in"
+                href="mailto:support.chartmentor@gmail.com"
                 className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:border-blue-500/20 hover:bg-white/[0.05]"
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600/10 text-blue-400">
                   <FaEnvelope />
                 </div>
 
-                <div>
+                <div className="overflow-hidden">
                   <p className="text-xs uppercase tracking-wider text-gray-500">
                     Email
                   </p>
 
-                  <p className="text-sm font-medium text-gray-300">
-                    hello@chartmentor.in
+                  <p className="truncate text-sm font-medium text-gray-300">
+                    support.chartmentor@gmail.com
                   </p>
                 </div>
               </a>
 
+              {/* Phone */}
               <a
                 href="tel:+911234567890"
                 className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:border-blue-500/20 hover:bg-white/[0.05]"
@@ -268,22 +296,32 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-5 rounded-2xl border border-white/5 bg-white/[0.02] px-6 py-5 text-center sm:flex-row">
+        {/* Bottom Bar */}
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 rounded-2xl border border-white/5 bg-white/[0.02] px-5 py-5 text-center sm:flex-row">
+
           <p className="text-xs tracking-wide text-gray-500">
             © 2026 Chart Mentor. All Rights Reserved.
           </p>
 
-          <div className="flex items-center gap-5 text-xs text-gray-500">
-            <Link to="/privacy-policy" className="hover:text-blue-400">
+          <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-gray-500">
+            <Link
+              to="/privacy-policy"
+              className="transition-colors hover:text-blue-400"
+            >
               Privacy
             </Link>
 
-            <Link to="/terms" className="hover:text-blue-400">
+            <Link
+              to="/terms-and-conditions"
+              className="transition-colors hover:text-blue-400"
+            >
               Terms
             </Link>
 
-            <Link to="/refund-policy" className="hover:text-blue-400">
+            <Link
+              to="/refund-policy"
+              className="transition-colors hover:text-blue-400"
+            >
               Refund
             </Link>
           </div>

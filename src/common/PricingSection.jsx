@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Crown,
   Zap,
+  Package,
 } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +47,7 @@ export default function PricingSection() {
     if (user) {
       navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');
     } else {
-      navigate(`/student/register?plan=${planId}`);
+      navigate(`/login?redirect=/student/dashboard`);
     }
   };
   return (
@@ -93,7 +94,14 @@ export default function PricingSection() {
         {/* PRICING CARDS */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 
-          {plans.map((plan, index) => {
+          {plans.filter(p => p.isActive !== false && p.isVisible !== false).length === 0 ? (
+            <div className="col-span-1 lg:col-span-2 text-center py-12 rounded-[36px] border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.02] backdrop-blur-2xl">
+              <Package className="w-16 h-16 text-gray-600 mx-auto mb-6" />
+              <h3 className="text-2xl font-black text-gray-300">No Plans Available Right Now</h3>
+              <p className="text-gray-500 mt-2">Please check back soon for our latest membership offerings.</p>
+            </div>
+          ) : (
+            plans.filter(p => p.isActive !== false && p.isVisible !== false).map((plan, index) => {
             const Icon = index % 2 === 0 ? Zap : Crown;
             const popular = index === 1;
 
@@ -137,18 +145,24 @@ export default function PricingSection() {
                 <div className="relative mt-8">
                   <div className="mt-2 flex items-end gap-2">
                     <span className="text-5xl font-black sm:text-6xl">
-                      ₹{plan.price}
+                      ₹{plan.discountPrice ? plan.discountPrice.toLocaleString() : plan.price.toLocaleString()}
                     </span>
+                    {plan.discountPrice && (
+                      <span className="text-xl font-medium text-gray-500 line-through mb-1">
+                        ₹{plan.price.toLocaleString()}
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                {/* OFFER */}
+                {/* OFFER / DURATION */}
                 <div className="mt-6 inline-flex rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-blue-300">
-                  {plan.description || "LIMITED OFFER"}
+                  {plan.membershipType || "PREMIUM MEMBERSHIP"}
                 </div>
 
                 <p className="mt-3 text-sm text-gray-400">
-                  For First 200 Members Only
+                  {plan.durationDays ? `Valid for ${plan.durationDays} days` : "Lifetime Access"}
+                  {plan.description && <span className="block mt-1 text-xs opacity-70">{plan.description}</span>}
                 </p>
 
                 {/* FEATURES */}
@@ -180,7 +194,7 @@ export default function PricingSection() {
                 </button>
               </motion.div>
             );
-          })}
+          }))}
         </div>
 
         {/* ALL FEATURES */}
@@ -255,7 +269,16 @@ export default function PricingSection() {
             </div>
 
             {/* CTA */}
-            <button className="rounded-2xl border border-blue-500/20 bg-blue-600 px-8 py-5 text-sm font-black uppercase tracking-[0.25em] text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700">
+            <button 
+              onClick={() => {
+                if (user) {
+                  navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');
+                } else {
+                  navigate('/login?redirect=/student/dashboard');
+                }
+              }}
+              className="rounded-2xl border border-blue-500/20 bg-blue-600 px-8 py-5 text-sm font-black uppercase tracking-[0.25em] text-white transition-all duration-300 hover:scale-105 hover:bg-blue-700"
+            >
               JOIN TODAY
             </button>
           </div>

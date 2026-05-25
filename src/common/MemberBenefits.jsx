@@ -38,7 +38,13 @@ const benefits = [
   },
 ];
 
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 export default function MemberBenefits() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
   return (
     <section
       id="membership"
@@ -138,7 +144,16 @@ export default function MemberBenefits() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <button className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.25em] text-white shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(59,130,246,0.4)]">
+          <button 
+            onClick={() => {
+              if (user) {
+                navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');
+              } else {
+                navigate('/login?redirect=/student/dashboard');
+              }
+            }}
+            className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.25em] text-white shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(59,130,246,0.4)]"
+          >
             JOIN MEMBERSHIP NOW
 
             <div className="transition-transform duration-300 group-hover:translate-x-1">

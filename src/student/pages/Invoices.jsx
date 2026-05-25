@@ -11,7 +11,7 @@ export default function StudentInvoices() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/student/dashboard`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/student/profile`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setInvoices(res.data.data.invoices || []);

@@ -5,9 +5,8 @@ import {
   Eye,
   EyeOff,
   ArrowRight,
-  CheckCircle2,
 } from "lucide-react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -20,19 +19,18 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
 
   // Password Validation Rules
   const passwordRules = {
     length: password.length >= 8,
-    uppercase: /[A-Z]/.test(password),
     lowercase: /[a-z]/.test(password),
     number: /[0-9]/.test(password),
   };
 
   const isPasswordValid =
     passwordRules.length &&
-    passwordRules.uppercase &&
     passwordRules.lowercase &&
     passwordRules.number;
 
@@ -41,7 +39,7 @@ export default function Login() {
 
     if (!isPasswordValid) {
       toast.error(
-        "Password must be at least 8 characters and include uppercase, lowercase and number"
+        "invalid user or password "
       );
       return;
     }
@@ -66,7 +64,11 @@ export default function Login() {
       if (role === "admin") {
         navigate("/admin/dashboard");
       } else {
-        navigate("/student/dashboard");
+        const searchParams = new URLSearchParams(location.search);
+        const redirectUrl =
+          searchParams.get("redirect") || "/student/dashboard";
+
+        navigate(redirectUrl);
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed");
@@ -176,52 +178,6 @@ export default function Login() {
                 )}
               </button>
             </div>
-
-            {/* Password Suggestions */}
-            {password.length > 0 && (
-              <div className="mt-4 space-y-2 bg-white/[0.02] border border-white/5 rounded-2xl p-4">
-
-                <div
-                  className={`flex items-center gap-2 text-xs transition-all ${passwordRules.length
-                      ? "text-green-400"
-                      : "text-gray-500"
-                    }`}
-                >
-                  <CheckCircle2 className="w-4 h-4" />
-                  Minimum 8 characters
-                </div>
-
-                <div
-                  className={`flex items-center gap-2 text-xs transition-all ${passwordRules.uppercase
-                      ? "text-green-400"
-                      : "text-gray-500"
-                    }`}
-                >
-                  <CheckCircle2 className="w-4 h-4" />
-                  At least 1 uppercase letter
-                </div>
-
-                <div
-                  className={`flex items-center gap-2 text-xs transition-all ${passwordRules.lowercase
-                      ? "text-green-400"
-                      : "text-gray-500"
-                    }`}
-                >
-                  <CheckCircle2 className="w-4 h-4" />
-                  At least 1 lowercase letter
-                </div>
-
-                <div
-                  className={`flex items-center gap-2 text-xs transition-all ${passwordRules.number
-                      ? "text-green-400"
-                      : "text-gray-500"
-                    }`}
-                >
-                  <CheckCircle2 className="w-4 h-4" />
-                  At least 1 number
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Remember Me */}

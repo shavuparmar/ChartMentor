@@ -33,7 +33,13 @@ const features = [
   },
 ];
 
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 export default function HeroSection() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
   return (
     <section
       id="home"
@@ -90,7 +96,16 @@ export default function HeroSection() {
           {/* BUTTONS */}
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             {/* PRIMARY BUTTON */}
-            <button className="group flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-7 py-4 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_60px_rgba(59,130,246,0.45)] sm:px-8 sm:py-5 sm:text-sm">
+            <button 
+              onClick={() => {
+                if (user) {
+                  navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');
+                } else {
+                  navigate('/login?redirect=/student/dashboard');
+                }
+              }}
+              className="group flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-7 py-4 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_60px_rgba(59,130,246,0.45)] sm:px-8 sm:py-5 sm:text-sm"
+            >
               Join Membership
 
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />

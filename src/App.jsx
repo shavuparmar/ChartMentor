@@ -13,6 +13,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"))
 const TermsandCondition = lazy(() => import("./pages/TermsandCondition.jsx"))
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy.jsx"))
 const Sitemap = lazy(() => import("./pages/Sitemap.jsx"))
+const PaymentStatus = lazy(() => import("./pages/PaymentStatus.jsx"));
 
 
 const AdminLayout = lazy(() => import('./admin/layouts/AdminLayout'));
@@ -21,6 +22,8 @@ const AdminSettings = lazy(() => import('./admin/pages/Settings'));
 const AdminStudents = lazy(() => import('./admin/pages/Students'));
 const AdminPayments = lazy(() => import('./admin/pages/Payments'));
 const AdminPlans = lazy(() => import('./admin/pages/Plans'));
+const AdminChannels = lazy(() => import('./admin/pages/Channels'));
+const AdminCoupons = lazy(() => import('./admin/pages/Coupons'));
 const AdminNotifications = lazy(() => import('./admin/pages/Notifications'));
 const AdminSupportTickets = lazy(() => import('./admin/pages/SupportTickets'));
 
@@ -50,7 +53,7 @@ export default function App() {
                 <Route path="/terms-and-conditions" element={<TermsandCondition />} />
                 <Route path="/refund-policy" element={<RefundPolicy />} />
                 <Route path="/sitemap" element={<Sitemap />} />
-
+                <Route path="/payment/status" element={<PaymentStatus />} />
 
                 {/* New Routes */}
                 <Route path="/register" element={<StudentRegister />} />
@@ -63,6 +66,8 @@ export default function App() {
                   <Route path="students" element={<AdminStudents />} />
                   <Route path="payments" element={<AdminPayments />} />
                   <Route path="plans" element={<AdminPlans />} />
+                  <Route path="channels" element={<AdminChannels />} />
+                  <Route path="coupons" element={<AdminCoupons />} />
                   <Route path="notifications" element={<AdminNotifications />} />
                   <Route path="support" element={<AdminSupportTickets />} />
                   {/* Additional admin routes can be added here */}

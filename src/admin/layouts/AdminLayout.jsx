@@ -48,6 +48,8 @@ export default function AdminLayout() {
     { name: 'Students', path: '/admin/students', icon: <Users size={20} /> },
     { name: 'Payments', path: '/admin/payments', icon: <CreditCard size={20} /> },
     { name: 'Plans', path: '/admin/plans', icon: <CreditCard size={20} /> },
+    { name: 'Channels', path: '/admin/channels', icon: <MessageSquare size={20} /> },
+    { name: 'Coupons', path: '/admin/coupons', icon: <CreditCard size={20} /> }, // Maybe change icon later
     { name: 'Notifications', path: '/admin/notifications', icon: <Bell size={20} /> },
     { name: 'Support Tickets', path: '/admin/support', icon: <MessageSquare size={20} /> },
     { name: 'Settings', path: '/admin/settings', icon: <Settings size={20} /> },

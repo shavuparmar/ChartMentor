@@ -27,7 +27,7 @@ export default function AdminPayments() {
 
   const filteredPayments = payments.filter(p => 
     p.user?.email?.toLowerCase().includes(search.toLowerCase()) || 
-    p.razorpayPaymentId?.toLowerCase().includes(search.toLowerCase()) ||
+    p.merchantTransactionId?.toLowerCase().includes(search.toLowerCase()) ||
     p.id.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -115,7 +115,7 @@ export default function AdminPayments() {
               {filteredPayments.map((payment) => (
                 <tr key={payment.id} className="border-b border-white/5 hover:bg-white/[0.04] transition-colors group">
                   <td className="py-4 px-6 font-mono text-xs text-gray-400 group-hover:text-white transition-colors">
-                    {payment.razorpayPaymentId || payment.id}
+                    {payment.merchantTransactionId || payment.id}
                   </td>
                   <td className="py-4 px-6 text-sm font-semibold text-gray-300">
                     {payment.user?.email || 'N/A'}
