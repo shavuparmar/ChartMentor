@@ -86,17 +86,16 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-white/5 bg-[#030712] text-white">
 
-      {/* Background Effects */}
+      {/* Glow Effects */}
       <div className="pointer-events-none absolute left-0 top-0 h-[400px] w-[400px] rounded-full bg-blue-600/10 blur-[140px]" />
 
       <div className="pointer-events-none absolute bottom-0 right-0 h-[300px] w-[300px] rounded-full bg-indigo-600/10 blur-[120px]" />
 
       {/* CTA SECTION */}
       <div className="relative z-20 mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 lg:pt-20">
-
         <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl">
 
-          {/* Background Image */}
+          {/* Background */}
           <div className="absolute inset-0">
             <img
               src={laptopBg}
@@ -110,7 +109,7 @@ export default function Footer() {
           {/* Content */}
           <div className="relative z-10 flex flex-col gap-10 px-6 py-12 sm:px-8 md:px-12 lg:flex-row lg:items-center lg:justify-between lg:px-16 lg:py-20">
 
-            {/* Left Content */}
+            {/* Left */}
             <div className="max-w-2xl">
               <p className="mb-4 text-[10px] font-black uppercase tracking-[0.35em] text-blue-400 sm:text-xs">
                 AB AAPKI BAARI HAI
@@ -129,17 +128,17 @@ export default function Footer() {
               </h2>
 
               <p className="mt-6 max-w-xl text-sm leading-relaxed text-gray-300 sm:text-base">
-                Join India’s fast growing trading mentorship community and
-                learn professional trading with real guidance, live sessions,
-                and a supportive trader network.
+                Join India’s growing trading mentorship community and learn
+                professional trading with live sessions, expert guidance,
+                and real trader support.
               </p>
             </div>
 
-            {/* CTA Button */}
+            {/* Button */}
             <div className="flex w-full lg:w-auto lg:justify-end">
               <button
                 onClick={(e) => handleLinkClick(e, "/membership")}
-                className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.18em] text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(59,130,246,0.35)] active:scale-[0.98] sm:w-auto cursor-pointer"
+                className="group flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.18em] text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(59,130,246,0.35)] active:scale-[0.98] sm:w-auto"
               >
                 JOIN NOW
 
@@ -175,11 +174,10 @@ export default function Footer() {
 
             <p className="max-w-sm text-sm leading-relaxed text-gray-400">
               Helping traders learn, grow, and become consistently profitable
-              with professional mentorship, expert guidance, and community
-              support.
+              with mentorship, trading psychology, and real market knowledge.
             </p>
 
-            {/* Social Icons */}
+            {/* Social */}
             <div className="mt-8 flex flex-wrap gap-4">
               {socialLinks.map((social, i) => {
                 const Icon = social.icon;
@@ -190,7 +188,6 @@ export default function Footer() {
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Social Link ${i + 1}`}
                     className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-gray-300 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:bg-blue-600 hover:text-white"
                   >
                     <Icon className="text-lg" />
@@ -296,14 +293,52 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 rounded-2xl border border-white/5 bg-white/[0.02] px-5 py-5 text-center sm:flex-row">
+        {/* Disclaimer */}
+        <div className="mt-16 rounded-[2rem] border border-yellow-500/10 bg-yellow-500/[0.03] p-6 sm:p-8">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
 
-          <p className="text-xs tracking-wide text-gray-500">
-            © 2026 Chart Mentor. All Rights Reserved.
-          </p>
+            <div className="max-w-4xl">
+              <h3 className="text-sm font-black uppercase tracking-[0.3em] text-yellow-400">
+                Important Disclaimer
+              </h3>
 
-          <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-gray-500">
+              <p className="mt-4 text-sm leading-relaxed text-gray-400">
+                Chart Mentor is an educational platform created for learning
+                purposes only. We do not provide financial advice or guaranteed
+                profit services.
+              </p>
+
+              <p className="mt-4 text-sm leading-relaxed text-gray-400">
+                Trading in stocks, forex, and crypto involves financial risk.
+                Please trade responsibly and consult your financial advisor
+                before investing.
+              </p>
+
+              <p className="mt-4 text-sm font-semibold leading-relaxed text-yellow-300">
+                We are NOT SEBI Registered. All mentorship, sessions, and
+                educational content are strictly for informational and learning
+                purposes only.
+              </p>
+            </div>
+
+
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="mt-10 flex flex-col gap-5 rounded-2xl border border-white/5 bg-white/[0.02] px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+
+          <div className="text-center sm:text-left">
+            <p className="text-xs tracking-wide text-gray-500">
+              © 2026 Chart Mentor. All Rights Reserved.
+            </p>
+
+            <p className="mt-2 text-[11px] leading-relaxed text-gray-600">
+              Educational Platform Only • Not Financial Advice • Not SEBI Registered
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-gray-500 sm:justify-end">
             <Link
               to="/privacy-policy"
               className="transition-colors hover:text-blue-400"

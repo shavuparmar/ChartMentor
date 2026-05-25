@@ -18,13 +18,9 @@ const faqs = [
     answer:
       "Aapko exclusive trade setups, daily analysis, premium learning resources aur mentor support milega.",
   },
+
   {
-    question: "Refund policy kya hai?",
-    answer:
-      "Hum 7-days refund guarantee provide karte hain. Agar aapko membership valuable nahi lagti, toh aapka refund process kar diya jayega.",
-  },
-  {
-    question: "Live sessions kab hote hain?",
+    question: "Live Learning sessions kab hote hain?",
     answer:
       "Weekly live sessions conduct kiye jaate hain jahan market analysis aur doubt solving hota hai. Recordings bhi available rehti hain.",
   },
@@ -89,11 +85,10 @@ export default function FAQSection() {
                 delay: index * 0.08,
               }}
               viewport={{ once: true }}
-              className={`group overflow-hidden rounded-[28px] border backdrop-blur-2xl transition-all duration-500 ${
-                activeIndex === index
-                  ? "border-blue-500/30 bg-white/[0.05] shadow-[0_15px_60px_rgba(59,130,246,0.12)]"
-                  : "border-white/10 bg-white/[0.02] hover:border-blue-500/20 hover:bg-white/[0.03]"
-              }`}
+              className={`group overflow-hidden rounded-[28px] border backdrop-blur-2xl transition-all duration-500 ${activeIndex === index
+                ? "border-blue-500/30 bg-white/[0.05] shadow-[0_15px_60px_rgba(59,130,246,0.12)]"
+                : "border-white/10 bg-white/[0.02] hover:border-blue-500/20 hover:bg-white/[0.03]"
+                }`}
             >
               {/* QUESTION */}
               <button
@@ -104,11 +99,10 @@ export default function FAQSection() {
                 <div className="flex items-start gap-4">
                   {/* ICON */}
                   <div
-                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 ${
-                      activeIndex === index
-                        ? "bg-blue-600 text-white shadow-[0_0_30px_rgba(59,130,246,0.35)]"
-                        : "bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white"
-                    }`}
+                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 ${activeIndex === index
+                      ? "bg-blue-600 text-white shadow-[0_0_30px_rgba(59,130,246,0.35)]"
+                      : "bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white"
+                      }`}
                   >
                     <HelpCircle className="h-5 w-5" />
                   </div>
@@ -116,11 +110,10 @@ export default function FAQSection() {
                   {/* QUESTION */}
                   <div>
                     <h3
-                      className={`text-base font-bold leading-relaxed transition-all duration-300 sm:text-lg ${
-                        activeIndex === index
-                          ? "text-blue-300"
-                          : "text-white"
-                      }`}
+                      className={`text-base font-bold leading-relaxed transition-all duration-300 sm:text-lg ${activeIndex === index
+                        ? "text-blue-300"
+                        : "text-white"
+                        }`}
                     >
                       {faq.question}
                     </h3>
@@ -129,11 +122,10 @@ export default function FAQSection() {
 
                 {/* ARROW */}
                 <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ${
-                    activeIndex === index
-                      ? "rotate-180 border-blue-500/30 bg-blue-500/10 text-blue-400"
-                      : "border-white/10 bg-white/[0.03] text-gray-400"
-                  }`}
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ${activeIndex === index
+                    ? "rotate-180 border-blue-500/30 bg-blue-500/10 text-blue-400"
+                    : "border-white/10 bg-white/[0.03] text-gray-400"
+                    }`}
                 >
                   <ChevronDown className="h-5 w-5" />
                 </div>
@@ -187,7 +179,7 @@ export default function FAQSection() {
             </div>
 
             <button className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.3)]">
-              CONTACT SUPPORT
+              CONTACT WHATSAPP SUPPORT
 
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →

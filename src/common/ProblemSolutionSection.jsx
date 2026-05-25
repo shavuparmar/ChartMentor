@@ -55,7 +55,7 @@ const ProblemSolution = () => {
           <h2 className="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-7xl">
             Kya Aap In Problems Se
             <span className="mt-3 block bg-gradient-to-r from-red-400 to-orange-300 bg-clip-text text-transparent">
-              Face Rahe Ho?
+              Face kar Rahe Ho?
             </span>
           </h2>
 

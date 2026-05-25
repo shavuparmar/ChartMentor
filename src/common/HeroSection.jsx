@@ -10,6 +10,8 @@ import {
 
 import heroBg from "../assets/Chartheroback.png";
 
+import { indianUsers } from "../assets/imageexport";
+
 const features = [
   {
     icon: BarChart3,
@@ -96,7 +98,7 @@ export default function HeroSection() {
           {/* BUTTONS */}
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             {/* PRIMARY BUTTON */}
-            <button 
+            <button
               onClick={() => {
                 if (user) {
                   navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');
@@ -128,8 +130,8 @@ export default function HeroSection() {
               {[1, 2, 3, 4, 5].map((item) => (
                 <img
                   key={item}
-                  src={`https://i.pravatar.cc/100?img=${item + 10}`}
-                  alt="Trader"
+                  src={indianUsers[item % indianUsers.length]}
+                  alt="Indian Trader"
                   className="h-11 w-11 rounded-full border-2 border-[#030712] object-cover shadow-xl sm:h-12 sm:w-12"
                 />
               ))}
@@ -138,7 +140,7 @@ export default function HeroSection() {
             {/* TEXT */}
             <div>
               <p className="text-sm font-bold text-white sm:text-base">
-                Trusted by 5000+ Traders
+                Trusted by 3000+ Traders
               </p>
 
               <p className="mt-1 text-xs text-gray-400 sm:text-sm">

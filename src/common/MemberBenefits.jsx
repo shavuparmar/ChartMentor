@@ -36,6 +36,11 @@ const benefits = [
     title: "Q&A & Doubt Support",
     desc: "Get all your trading doubts solved instantly.",
   },
+  {
+    icon: MessageCircleQuestion,
+    title: "Guidance Support",
+    desc: "Get mentorship and guidance from expert traders.",
+  },
 ];
 
 import { useNavigate } from "react-router-dom";
@@ -109,11 +114,10 @@ export default function MemberBenefits() {
 
                 {/* ICON */}
                 <div
-                  className={`relative flex h-20 w-20 items-center justify-center rounded-3xl transition-all duration-500 group-hover:scale-110 ${
-                    benefit.telegram
-                      ? "bg-gradient-to-br from-blue-500 to-cyan-400 text-white shadow-[0_0_35px_rgba(59,130,246,0.35)]"
-                      : "bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white"
-                  }`}
+                  className={`relative flex h-20 w-20 items-center justify-center rounded-3xl transition-all duration-500 group-hover:scale-110 ${benefit.telegram
+                    ? "bg-gradient-to-br from-blue-500 to-cyan-400 text-white shadow-[0_0_35px_rgba(59,130,246,0.35)]"
+                    : "bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white"
+                    }`}
                 >
                   <Icon className="h-10 w-10" />
                 </div>
@@ -144,7 +148,7 @@ export default function MemberBenefits() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <button 
+          <button
             onClick={() => {
               if (user) {
                 navigate(user.role === 'admin' ? '/admin/dashboard' : '/student/dashboard');

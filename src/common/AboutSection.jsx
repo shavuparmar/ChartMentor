@@ -150,7 +150,7 @@ export default function AboutSection() {
 
               <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl">
                 <h4 className="text-3xl font-black text-blue-400">
-                  1500+
+                  3200+
                 </h4>
 
                 <p className="mt-2 text-sm uppercase tracking-wide text-gray-400">
