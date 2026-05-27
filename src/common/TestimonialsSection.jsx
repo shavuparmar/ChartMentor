@@ -7,13 +7,12 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-import { indianUsers } from "../assets/imageexport";
-
 const testimonials = [
   {
     name: "Rahul Mehta",
     role: "Intraday Trader",
-    image: indianUsers[4],
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
     review:
       "ChartMentors helped me understand market psychology and risk management properly. The mentorship sessions are practical and extremely valuable for serious traders.",
     rating: 5,
@@ -22,9 +21,10 @@ const testimonials = [
   },
 
   {
-    name: "Priya Sharma",
+    name: "Arjun Singh",
     role: "Options Trader",
-    image: indianUsers[7],
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80",
     review:
       "The live trading sessions and mentorship support completely improved my confidence. I finally started following a disciplined trading system.",
     rating: 5,
@@ -35,7 +35,8 @@ const testimonials = [
   {
     name: "Aman Patel",
     role: "Forex Trader",
-    image: indianUsers[11],
+    image:
+      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=400&q=80",
     review:
       "Best trading community I’ve joined so far. The strategies are easy to understand and the mentors genuinely help every student grow consistently.",
     rating: 5,
@@ -44,9 +45,10 @@ const testimonials = [
   },
 
   {
-    name: "Sneha Verma",
+    name: "Sanjay Verma",
     role: "Swing Trader",
-    image: indianUsers[9],
+    image:
+      "https://images.unsplash.com/photo-1504257432389-52343af06ae3?auto=format&fit=crop&w=400&q=80",
     review:
       "I joined as a beginner and within months my understanding of charts and entries improved massively. Highly recommended for new traders.",
     rating: 5,
@@ -55,14 +57,27 @@ const testimonials = [
   },
 
   {
-    name: "Karan Singh",
+    name: "Karan Malhotra",
     role: "Crypto Trader",
-    image: indianUsers[10],
+    image:
+      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80",
     review:
       "Professional mentorship with genuine guidance. The support team and trading community always motivate you to stay focused and disciplined.",
     rating: 5,
     screenshot:
       "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1000&q=80",
+  },
+
+  {
+    name: "Rohit Sharma",
+    role: "Scalping Trader",
+    image:
+      "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=400&q=80",
+    review:
+      "The mentorship quality is amazing. Every concept is explained clearly with proper market examples and practical trading psychology.",
+    rating: 5,
+    screenshot:
+      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1000&q=80",
   },
 ];
 
@@ -115,7 +130,7 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        {/* Testimonials */}
+        {/* Testimonials Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((item, i) => (
             <motion.div
@@ -127,8 +142,11 @@ export default function TestimonialsSection() {
                 delay: i * 0.1,
               }}
               viewport={{ once: true }}
-              className="group relative rounded-[28px] sm:rounded-[35px] overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-2xl hover:border-cyan-400/20 transition-all duration-500 hover:-translate-y-2"
+              className="group relative rounded-[28px] sm:rounded-[35px] overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-2xl hover:border-cyan-400/30 transition-all duration-500 hover:-translate-y-2"
             >
+              {/* Hover Glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-b from-cyan-500/10 to-transparent pointer-events-none" />
+
               {/* Screenshot */}
               <div className="relative h-52 sm:h-60 overflow-hidden">
                 <img
@@ -141,7 +159,7 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Content */}
-              <div className="p-5 sm:p-7 flex flex-col">
+              <div className="p-5 sm:p-7 flex flex-col h-full">
                 {/* Stars */}
                 <div className="flex gap-1 mb-5">
                   {[...Array(item.rating)].map((_, index) => (
@@ -165,19 +183,20 @@ export default function TestimonialsSection() {
                   </p>
                 </div>
 
-                {/* User */}
+                {/* User Section */}
                 <div className="mt-auto pt-5 border-t border-white/10 flex items-center gap-4">
                   {/* User Image */}
                   <div className="relative flex-shrink-0">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-cyan-400/30 bg-[#0f172a]">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-cyan-400/30 bg-[#0f172a] shadow-lg">
                       <img
                         src={item.image}
                         alt={item.name}
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                     </div>
 
-                    {/* Verified */}
+                    {/* Verified Badge */}
                     <div className="absolute -bottom-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-cyan-500 flex items-center justify-center border-2 border-[#020617]">
                       <ShieldCheck
                         size={11}

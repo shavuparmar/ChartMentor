@@ -1,18 +1,27 @@
-import userone from "./usero.jpg"
-import usertwo from "./usert.jpg"
-import userthre from "./userthre.jpg"
-import userfour from "./userfour.jpg"
-import userfive from "./userfive.jpg"
-import usersix from "./usersix.jpg"
-import userseven from "./userseven.jpg"
-import usereight from "./usereight.jpg"
-import usernine from "./usernin.jpg"
+import userone from "./usero.jpg";
+import usertwo from "./usertwo.jpg";
+import userthree from "./userthree.jpg";
+import userfour from "./userfour.jpg";
+import userfive from "./userfive.jpeg";
+import usersix from "./usersix.jpg";
+import userseven from "./userseven.jpg";
 
-import userten from "./userten.jpg"
-import usereleven from "./usereleven.jpg"
-import usertevel from "./usertevel.jpg"
-import userthirty from "./userhe.jpeg"
+
+import userten from "./userten.jpg";
+
+import usertwelve from "./usertevel.jpg";
 
 export const indianUsers = [
-    userone, usertwo, userthre, userfour, userfive, usersix, userseven, usereight, usernine, userten, usereleven, usertevel, userthirty
-]
+    userone,
+    usertwo,
+    userthree,
+    userfour,
+    userfive,
+    usersix,
+    userseven,
+
+
+    userten,
+
+    usertwelve,
+];
