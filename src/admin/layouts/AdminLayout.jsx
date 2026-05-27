@@ -87,11 +87,10 @@ export default function AdminLayout() {
             <Link
               key={item.name}
               to={item.path}
-              className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-300 relative group ${
-                isActive
+              className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-300 relative group ${isActive
                   ? 'bg-gradient-to-r from-indigo-600/35 to-purple-600/20 text-white border border-indigo-500/30'
                   : 'text-gray-400 hover:bg-white/[0.03] hover:text-white border border-transparent'
-              }`}
+                }`}
             >
               {/* Active glow dot */}
               {isActive && (
@@ -137,10 +136,9 @@ export default function AdminLayout() {
   return (
     <div className="flex h-screen bg-[#040816] text-white font-sans overflow-hidden">
       {/* DESKTOP SIDEBAR */}
-      <aside 
-        className={`hidden lg:flex flex-col border-r border-white/5 relative z-30 transition-all duration-300 ${
-          isCollapsed ? 'w-20' : 'w-64'
-        }`}
+      <aside
+        className={`hidden lg:flex flex-col border-r border-white/5 relative z-30 transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'
+          }`}
       >
         {sidebarContent(false)}
         {/* Toggle Collapse Button */}

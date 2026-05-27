@@ -24,7 +24,7 @@ export default function CheckoutButton({ amount, planId, className = "" }) {
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      
+
       setAppliedCoupon(res.data.data);
       toast.success(res.data.data.message);
     } catch (error) {
@@ -45,28 +45,28 @@ export default function CheckoutButton({ amount, planId, className = "" }) {
     try {
       const token = localStorage.getItem('token');
       const payload = { planId, couponCode: appliedCoupon?.couponCode || null };
-      
-      const orderRes = await axios.post(`${import.meta.env.VITE_API_URL}/api/payment/create-order`, 
+
+      const orderRes = await axios.post(`${import.meta.env.VITE_API_URL}/api/payment/create-order`,
         payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       // Redirect to Merchant UPI Payment URL or Show QR
       if (orderRes.data.success) {
-         if (orderRes.data.message) {
-            toast.success(orderRes.data.message);
-         }
-         
-         if (orderRes.data.data.paymentUrl) {
-            window.location.href = orderRes.data.data.paymentUrl;
-         } else if (orderRes.data.data.qrUrl) {
-            setQrCode(orderRes.data.data.qrUrl);
-            setOrderId(orderRes.data.data.id);
-         } else {
-            toast.error("Failed to get payment details.");
-         }
+        if (orderRes.data.message) {
+          toast.success(orderRes.data.message);
+        }
+
+        if (orderRes.data.data.paymentUrl) {
+          window.location.href = orderRes.data.data.paymentUrl;
+        } else if (orderRes.data.data.qrUrl) {
+          setQrCode(orderRes.data.data.qrUrl);
+          setOrderId(orderRes.data.data.id);
+        } else {
+          toast.error("Failed to get payment details.");
+        }
       } else {
-         toast.error(orderRes.data.message || "Failed to get payment details.");
+        toast.error(orderRes.data.message || "Failed to get payment details.");
       }
 
     } catch (error) {
@@ -85,7 +85,7 @@ export default function CheckoutButton({ amount, planId, className = "" }) {
           <p className="text-sm font-bold text-gray-300 mb-4">Scan QR to Pay ₹{finalAmount}</p>
           <img src={qrCode} alt="UPI QR Code" className="w-48 h-48 mx-auto bg-white p-2 rounded-lg" />
           <p className="text-xs text-gray-500 mt-4">Order ID: {orderId}</p>
-          <button 
+          <button
             onClick={() => window.location.href = `/payment/status?cmOrderId=${orderId}`}
             className="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs uppercase tracking-wide rounded-lg transition-colors w-full"
           >
@@ -98,7 +98,7 @@ export default function CheckoutButton({ amount, planId, className = "" }) {
 
   return (
     <div className={`space-y-4 ${className}`}>
-      
+
       {/* Coupon Section */}
       <div className="bg-white/[0.02] border border-white/5 p-4 rounded-xl">
         {!appliedCoupon ? (
@@ -140,17 +140,17 @@ export default function CheckoutButton({ amount, planId, className = "" }) {
       <button 
         onClick={handlePayment} 
         disabled={loading}
-        className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] transition-all duration-300 rounded-xl text-white font-bold text-xs uppercase tracking-[0.15em] disabled:opacity-50 disabled:scale-100 disabled:shadow-none flex items-center justify-center gap-2 cursor-pointer"
+        className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all duration-300 rounded-xl text-white font-black text-xs sm:text-[13px] uppercase tracking-[0.15em] disabled:opacity-50 disabled:scale-100 disabled:shadow-none flex items-center justify-center gap-2.5 cursor-pointer border border-blue-400/20"
       >
         {loading ? (
           <>
-            <Loader2 className="w-4 h-4 animate-spin text-white" />
+            <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin text-white/80" />
             Processing...
           </>
         ) : (
           <>
-            <CreditCard className="w-4 h-4" />
-            Pay ₹{finalAmount} with UPI
+            <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-blue-200" />
+            Proceed to Pay ₹{finalAmount.toLocaleString()}
           </>
         )}
       </button>

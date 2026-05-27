@@ -210,7 +210,10 @@ export default function StudentDashboard() {
                       <CheckCircle className="w-4 h-4" /> Enrolled / Active
                     </button>
                   ) : (
-                    <CheckoutButton amount={plan.price} planId={plan.id} />
+                    <CheckoutButton 
+                      amount={plan.discountPrice !== null && plan.discountPrice !== undefined ? plan.discountPrice : plan.price} 
+                      planId={plan.id} 
+                    />
                   )}
                 </div>
               </div>
