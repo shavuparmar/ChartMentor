@@ -194,11 +194,16 @@ export default function StudentDashboard() {
                 </div>
 
                 <div className="border-t border-white/5 pt-4 flex flex-col gap-5 mt-auto">
-                  <div className="flex items-baseline gap-1">
+                  <div className="flex items-baseline gap-2">
                     <span className="text-gray-400 text-sm font-semibold">INR</span>
                     <span className="text-3xl font-black text-white">
-                      ₹{plan.price}
+                      ₹{plan.discountPrice !== null && plan.discountPrice !== undefined ? plan.discountPrice.toLocaleString() : plan.price.toLocaleString()}
                     </span>
+                    {plan.discountPrice !== null && plan.discountPrice !== undefined && plan.discountPrice < plan.price && (
+                      <span className="text-sm font-medium text-gray-500 line-through opacity-70">
+                        ₹{plan.price.toLocaleString()}
+                      </span>
+                    )}
                   </div>
                   {isActive && data?.membership?.planId === plan.id ? (
                     <button disabled className="w-full py-3.5 bg-emerald-600/20 border border-emerald-500/30 rounded-xl text-emerald-400 font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 cursor-not-allowed">

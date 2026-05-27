@@ -145,14 +145,23 @@ export default function PricingSection() {
 
                   {/* PRICE */}
                   <div className="relative mt-8">
-                    <div className="mt-2 flex items-end gap-2">
-                      <span className="text-5xl font-black sm:text-6xl">
-                        ₹{plan.discountPrice !== null && plan.discountPrice !== undefined ? plan.discountPrice.toLocaleString() : plan.price.toLocaleString()}
-                      </span>
-                      {plan.discountPrice !== null && plan.discountPrice !== undefined && plan.discountPrice < plan.price && (
-                        <span className="text-xl font-medium text-gray-500 line-through mb-1">
-                          ₹{plan.price.toLocaleString()}
+                    <div className="mt-2 flex flex-col gap-1">
+                      <div className="flex items-end gap-2">
+                        <span className="text-5xl font-black sm:text-6xl">
+                          ₹{plan.discountPrice !== null && plan.discountPrice !== undefined ? plan.discountPrice.toLocaleString() : plan.price.toLocaleString()}
                         </span>
+                        {plan.discountPrice !== null && plan.discountPrice !== undefined && plan.discountPrice < plan.price && (
+                          <span className="text-xl font-medium text-gray-500 line-through mb-1">
+                            ₹{plan.price.toLocaleString()}
+                          </span>
+                        )}
+                      </div>
+                      
+                      {plan.discountPrice !== null && plan.discountPrice !== undefined && plan.discountPrice < plan.price && (
+                        <div className="mt-2 inline-flex self-start items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-black uppercase tracking-widest text-emerald-400">
+                          <Check className="h-3 w-3" />
+                          Save ₹{(plan.price - plan.discountPrice).toLocaleString()} ({Math.round(((plan.price - plan.discountPrice) / plan.price) * 100)}% OFF)
+                        </div>
                       )}
                     </div>
                   </div>
