@@ -101,7 +101,7 @@ export default function PricingSection() {
           ) : (
             plans.filter(p => p.isActive !== false && p.isVisible !== false).map((plan, index) => {
               const Icon = index % 2 === 0 ? Zap : Crown;
-              const popular = index === 1;
+              const popular = plan.isFeatured;
 
               return (
                 <motion.div
@@ -134,17 +134,22 @@ export default function PricingSection() {
                   </div>
 
                   {/* PLAN NAME */}
-                  <h3 className="relative mt-8 text-sm font-black uppercase tracking-[0.35em] text-gray-400">
+                  <h3 className="relative mt-8 text-sm font-black uppercase tracking-[0.35em] text-gray-400 flex items-center gap-2">
                     {plan.name}
+                    {plan.offerLabel && (
+                      <span className="bg-yellow-500/20 text-yellow-400 text-[10px] px-2 py-0.5 rounded-full border border-yellow-500/30">
+                        {plan.offerLabel}
+                      </span>
+                    )}
                   </h3>
 
                   {/* PRICE */}
                   <div className="relative mt-8">
                     <div className="mt-2 flex items-end gap-2">
                       <span className="text-5xl font-black sm:text-6xl">
-                        ₹{plan.discountPrice ? plan.discountPrice.toLocaleString() : plan.price.toLocaleString()}
+                        ₹{plan.discountPrice !== null && plan.discountPrice !== undefined ? plan.discountPrice.toLocaleString() : plan.price.toLocaleString()}
                       </span>
-                      {plan.discountPrice && (
+                      {plan.discountPrice !== null && plan.discountPrice !== undefined && plan.discountPrice < plan.price && (
                         <span className="text-xl font-medium text-gray-500 line-through mb-1">
                           ₹{plan.price.toLocaleString()}
                         </span>

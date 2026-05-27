@@ -53,17 +53,20 @@ export default function CheckoutButton({ amount, planId, className = "" }) {
 
       // Redirect to Merchant UPI Payment URL or Show QR
       if (orderRes.data.success) {
+         if (orderRes.data.message) {
+            toast.success(orderRes.data.message);
+         }
+         
          if (orderRes.data.data.paymentUrl) {
             window.location.href = orderRes.data.data.paymentUrl;
          } else if (orderRes.data.data.qrUrl) {
             setQrCode(orderRes.data.data.qrUrl);
             setOrderId(orderRes.data.data.id);
-            // Optionally, we could start polling for status here
          } else {
             toast.error("Failed to get payment details.");
          }
       } else {
-         toast.error("Failed to get payment details.");
+         toast.error(orderRes.data.message || "Failed to get payment details.");
       }
 
     } catch (error) {

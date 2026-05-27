@@ -156,7 +156,7 @@ export default function StudentRegister() {
         `${import.meta.env.VITE_API_URL}/api/auth/verify-email`,
         {
           email,
-          otp,
+          otp: otp.toString().trim(),
         }
       );
 

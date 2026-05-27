@@ -25,6 +25,10 @@ export default function AdminPlans() {
     membershipType: '',
     isActive: true,
     isVisible: true,
+    discountType: '',
+    discountValue: '',
+    offerLabel: '',
+    isFeatured: false,
     features: []
   };
 
@@ -57,6 +61,10 @@ export default function AdminPlans() {
         ...newPlan,
         price: Number(newPlan.price),
         discountPrice: newPlan.discountPrice ? Number(newPlan.discountPrice) : null,
+        discountValue: newPlan.discountValue ? Number(newPlan.discountValue) : null,
+        discountType: newPlan.discountType || null,
+        offerLabel: newPlan.offerLabel || null,
+        isFeatured: newPlan.isFeatured || false,
         durationDays: newPlan.durationDays ? Number(newPlan.durationDays) : null,
         startDate: newPlan.startDate || null,
         endDate: newPlan.endDate || null,
@@ -150,6 +158,10 @@ export default function AdminPlans() {
       startDate: plan.startDate ? plan.startDate.split('T')[0] : '',
       endDate: plan.endDate ? plan.endDate.split('T')[0] : '',
       membershipType: plan.membershipType || '',
+      discountType: plan.discountType || '',
+      discountValue: plan.discountValue || '',
+      offerLabel: plan.offerLabel || '',
+      isFeatured: plan.isFeatured || false,
       isActive: plan.isActive ?? true,
       isVisible: plan.isVisible ?? true,
       features: plan.features || []
@@ -262,6 +274,11 @@ export default function AdminPlans() {
                   <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-wider ${plan.isVisible ? 'text-blue-400' : 'text-gray-400'}`}>
                     {plan.isVisible ? 'Visible' : 'Hidden'}
                   </div>
+                  {plan.isFeatured && (
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/20 border border-yellow-500/30 text-xs font-bold uppercase tracking-wider text-yellow-400">
+                      Featured
+                    </div>
+                  )}
                 </div>
                 <div className="flex gap-2">
                   <button onClick={() => toggleStatus(plan, 'isVisible')} className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors" title="Toggle Visibility">
@@ -382,14 +399,56 @@ export default function AdminPlans() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold uppercase tracking-wider text-gray-300">Discount Price (INR)</label>
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-300">Discount Type</label>
+                      <select
+                        value={newPlan.discountType}
+                        onChange={(e) => setNewPlan({ ...newPlan, discountType: e.target.value })}
+                        className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-indigo-500/50 focus:bg-white/[0.05] transition-all"
+                      >
+                        <option value="" className="bg-gray-900">None</option>
+                        <option value="PERCENTAGE" className="bg-gray-900">Percentage (%)</option>
+                        <option value="FIXED" className="bg-gray-900">Fixed Amount (INR)</option>
+                      </select>
+                    </div>
+
+                    {newPlan.discountType && (
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold uppercase tracking-wider text-gray-300">
+                          {newPlan.discountType === 'PERCENTAGE' ? 'Discount Percentage (%)' : 'Discount Amount (INR)'}
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={newPlan.discountValue}
+                          onChange={(e) => setNewPlan({ ...newPlan, discountValue: e.target.value })}
+                          className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-indigo-500/50 focus:bg-white/[0.05] transition-all placeholder:text-gray-600"
+                          placeholder="e.g. 20"
+                        />
+                      </div>
+                    )}
+
+                    {!newPlan.discountType && (
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold uppercase tracking-wider text-gray-300">Final Discount Price (INR)</label>
+                        <input
+                          type="number"
+                          min="1"
+                          value={newPlan.discountPrice}
+                          onChange={(e) => setNewPlan({ ...newPlan, discountPrice: e.target.value })}
+                          className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-indigo-500/50 focus:bg-white/[0.05] transition-all placeholder:text-gray-600"
+                          placeholder="Optional (if no discount logic)"
+                        />
+                      </div>
+                    )}
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase tracking-wider text-gray-300">Offer Label</label>
                       <input
-                        type="number"
-                        min="1"
-                        value={newPlan.discountPrice}
-                        onChange={(e) => setNewPlan({ ...newPlan, discountPrice: e.target.value })}
+                        type="text"
+                        value={newPlan.offerLabel}
+                        onChange={(e) => setNewPlan({ ...newPlan, offerLabel: e.target.value })}
                         className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-indigo-500/50 focus:bg-white/[0.05] transition-all placeholder:text-gray-600"
-                        placeholder="Optional"
+                        placeholder="e.g. Summer Sale, Limited Offer"
                       />
                     </div>
 
@@ -431,6 +490,20 @@ export default function AdminPlans() {
                           <div className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform ${newPlan.isVisible ? 'transform translate-x-6' : ''}`}></div>
                         </div>
                         <span className="text-sm font-bold text-gray-300">Visible to Public</span>
+                      </label>
+
+                      <label className="flex items-center cursor-pointer gap-3">
+                        <div className="relative">
+                          <input
+                            type="checkbox"
+                            className="sr-only"
+                            checked={newPlan.isFeatured}
+                            onChange={(e) => setNewPlan({ ...newPlan, isFeatured: e.target.checked })}
+                          />
+                          <div className={`block w-12 h-6 rounded-full transition-colors ${newPlan.isFeatured ? 'bg-yellow-500' : 'bg-white/10 border border-white/20'}`}></div>
+                          <div className={`dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform ${newPlan.isFeatured ? 'transform translate-x-6' : ''}`}></div>
+                        </div>
+                        <span className="text-sm font-bold text-gray-300">Featured (Most Popular)</span>
                       </label>
                     </div>
 
