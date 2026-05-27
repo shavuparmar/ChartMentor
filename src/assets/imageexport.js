@@ -8,10 +8,11 @@ import userseven from "./userseven.jpg"
 import usereight from "./usereight.jpg"
 import usernine from "./usernin.jpg"
 
-
-
-
+import userten from "./userten.jpg"
+import usereleven from "./usereleven.jpg"
+import usertevel from "./usertevel.jpg"
+import userthirty from "./userhe.jpeg"
 
 export const indianUsers = [
-    userone, usertwo, userthre, userfour, userfive, usersix, userseven, usereight, usernine
+    userone, usertwo, userthre, userfour, userfive, usersix, userseven, usereight, usernine, userten, usereleven, usertevel, userthirty
 ]

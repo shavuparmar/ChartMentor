@@ -7,6 +7,7 @@ import {
     MessageCircle,
     Clock3,
     ArrowRight,
+    PhoneForwarded,
 } from "lucide-react";
 
 export default function ChartMentorContactPage() {
@@ -14,15 +15,17 @@ export default function ChartMentorContactPage() {
         {
             icon: Mail,
             title: "Email Support",
-            value: "support@chartmentor.com",
+            value: "support.chartmentor@gamil.com",
             description: "Get assistance for memberships, payments, and mentorship.",
         },
         {
             icon: Phone,
-            title: "Phone Support",
+            title: "Help Line",
             value: "+91 98765 43210",
             description: "Available Monday to Saturday for premium members.",
         },
+
+
         {
             icon: MapPin,
             title: "Office Location",

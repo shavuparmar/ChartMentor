@@ -6,6 +6,7 @@ import {
   Users,
   BadgeCheck,
   TrendingUp,
+
 } from "lucide-react";
 
 import heroBg from "../assets/Chartheroback.png";
@@ -33,6 +34,7 @@ const features = [
     title: "Proven Results",
     desc: "Build discipline, confidence & trading consistency.",
   },
+
 ];
 
 import { useNavigate } from "react-router-dom";
