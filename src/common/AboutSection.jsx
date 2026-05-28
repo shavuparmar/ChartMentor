@@ -1,15 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  TrendingUp,
-  ShieldCheck,
-  BadgeCheck,
-  ArrowRight,
-} from "lucide-react";
-
+import { TrendingUp, ShieldCheck, BadgeCheck, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import aboutImage from "../assets/Chartheroback.png";
 
 export default function AboutSection() {
+    const navigate = useNavigate();
   return (
     <section
       id="about"
@@ -21,7 +17,6 @@ export default function AboutSection() {
       <div className="absolute bottom-0 right-0 h-[350px] w-[350px] rounded-full bg-indigo-600/10 blur-[140px]" />
 
       <div className="relative mx-auto max-w-7xl">
-
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
@@ -42,7 +37,6 @@ export default function AboutSection() {
 
         {/* MAIN GRID */}
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
-
           {/* IMAGE SIDE */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -56,7 +50,6 @@ export default function AboutSection() {
 
             {/* IMAGE CONTAINER */}
             <div className="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/[0.03] backdrop-blur-2xl">
-
               {/* IMAGE */}
               <img
                 src={aboutImage}
@@ -70,7 +63,6 @@ export default function AboutSection() {
               {/* BOTTOM INFO CARD */}
               <div className="absolute bottom-5 left-5 right-5 rounded-3xl border border-white/10 bg-black/30 p-5 backdrop-blur-xl">
                 <div className="flex items-center gap-4">
-
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600/20 text-blue-400">
                     <TrendingUp className="h-7 w-7" />
                   </div>
@@ -113,38 +105,38 @@ export default function AboutSection() {
 
             {/* DESCRIPTION */}
             <div className="mt-8 space-y-6 text-base leading-relaxed text-gray-300 sm:text-lg">
-
               <p>
                 My name is {""}
-                <span className="font-bold text-white">
-                  Arun
-                </span> {"Gupta "}
+                <span className="font-bold text-white">Arun</span> {"Gupta "}
                 and I have been actively trading for over 5+ years.
               </p>
 
               <p>
-                I have faced numerous losses, made emotional mistakes, constantly changed strategies, and eventually understood the market deeply. Today, I follow a highly disciplined and consistent trading approach.
+                I have faced numerous losses, made emotional mistakes,
+                constantly changed strategies, and eventually understood the
+                market deeply. Today, I follow a highly disciplined and
+                consistent trading approach.
               </p>
 
               {/* QUOTE CARD */}
               <div className="rounded-3xl border border-blue-500/10 bg-blue-500/[0.05] p-6 backdrop-blur-xl">
                 <p className="text-lg italic leading-relaxed text-gray-200">
-                  “My mission is to ensure you don't repeat the mistakes I made, saving your valuable time, money, and energy.”
+                  “My mission is to ensure you don't repeat the mistakes I made,
+                  saving your valuable time, money, and energy.”
                 </p>
               </div>
 
               <p>
-                Chart Mentor is not just a trading community — it is a complete mentorship ecosystem where you get a clear roadmap, reliable support, and genuine guidance.
+                Chart Mentor is not just a trading community — it is a complete
+                mentorship ecosystem where you get a clear roadmap, reliable
+                support, and genuine guidance.
               </p>
             </div>
 
             {/* STATS */}
             <div className="mt-10 grid grid-cols-2 gap-5">
-
               <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl">
-                <h4 className="text-3xl font-black text-blue-400">
-                  3500+
-                </h4>
+                <h4 className="text-3xl font-black text-blue-400">3500+</h4>
 
                 <p className="mt-2 text-sm uppercase tracking-wide text-gray-400">
                   Traders Community
@@ -152,9 +144,7 @@ export default function AboutSection() {
               </div>
 
               <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-xl">
-                <h4 className="text-3xl font-black text-blue-400">
-                  5+ Years
-                </h4>
+                <h4 className="text-3xl font-black text-blue-400">5+ Years</h4>
 
                 <p className="mt-2 text-sm uppercase tracking-wide text-gray-400">
                   Market Experience
@@ -163,9 +153,11 @@ export default function AboutSection() {
             </div>
 
             {/* CTA BUTTON */}
-            <button className="group mt-10 inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.25em] text-white shadow-[0_0_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(59,130,246,0.4)]">
-              Join Chart Mentor
-
+            <button
+              onClick={() => navigate("/login?redirect=/student/dashboard")}
+              className="group mt-5 cursor-pointer flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 px-7 py-4 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[0_10px_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_15px_60px_rgba(59,130,246,0.45)] active:scale-[0.98] sm:px-8 sm:py-5 sm:text-sm"
+            >
+              Join Membership
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 

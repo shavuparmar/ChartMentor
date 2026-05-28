@@ -15,20 +15,9 @@ import laptopBg from "../assets/Laptop.jpg";
 const socialLinks = [
   {
     icon: FaInstagram,
-    link: "https://instagram.com",
+    link: "https://www.instagram.com/chart_mentorfx",
   },
-  {
-    icon: FaYoutube,
-    link: "https://youtube.com",
-  },
-  {
-    icon: FaTwitter,
-    link: "https://twitter.com",
-  },
-  {
-    icon: FaTelegramPlane,
-    link: "https://telegram.org",
-  },
+
 ];
 
 const quickLinks = [
@@ -272,7 +261,7 @@ export default function Footer() {
 
               {/* Phone */}
               <a
-                href="tel:+911234567890"
+                href="tel:+917801825312 "
                 className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-4 transition-all duration-300 hover:border-blue-500/20 hover:bg-white/[0.05]"
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600/10 text-blue-400">
@@ -285,7 +274,7 @@ export default function Footer() {
                   </p>
 
                   <p className="text-sm font-medium text-gray-300">
-                    +91 12345 67890
+                    +91 7801825312 
                   </p>
                 </div>
               </a>

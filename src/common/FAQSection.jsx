@@ -67,7 +67,8 @@ export default function FAQSection() {
 
           {/* Description */}
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 sm:text-lg">
-            Find answers to all important questions related to trading mentorship and our membership program below.
+            Find answers to all important questions related to trading
+            mentorship and our membership program below.
           </p>
         </motion.div>
 
@@ -83,10 +84,11 @@ export default function FAQSection() {
                 delay: index * 0.08,
               }}
               viewport={{ once: true }}
-              className={`group overflow-hidden rounded-[28px] border backdrop-blur-2xl transition-all duration-500 ${activeIndex === index
-                ? "border-blue-500/30 bg-white/[0.05] shadow-[0_15px_60px_rgba(59,130,246,0.12)]"
-                : "border-white/10 bg-white/[0.02] hover:border-blue-500/20 hover:bg-white/[0.03]"
-                }`}
+              className={`group overflow-hidden rounded-[28px] border backdrop-blur-2xl transition-all duration-500 ${
+                activeIndex === index
+                  ? "border-blue-500/30 bg-white/[0.05] shadow-[0_15px_60px_rgba(59,130,246,0.12)]"
+                  : "border-white/10 bg-white/[0.02] hover:border-blue-500/20 hover:bg-white/[0.03]"
+              }`}
             >
               {/* QUESTION */}
               <button
@@ -97,10 +99,11 @@ export default function FAQSection() {
                 <div className="flex items-start gap-4">
                   {/* ICON */}
                   <div
-                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 ${activeIndex === index
-                      ? "bg-blue-600 text-white shadow-[0_0_30px_rgba(59,130,246,0.35)]"
-                      : "bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white"
-                      }`}
+                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 ${
+                      activeIndex === index
+                        ? "bg-blue-600 text-white shadow-[0_0_30px_rgba(59,130,246,0.35)]"
+                        : "bg-blue-500/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white"
+                    }`}
                   >
                     <HelpCircle className="h-5 w-5" />
                   </div>
@@ -108,10 +111,9 @@ export default function FAQSection() {
                   {/* QUESTION */}
                   <div>
                     <h3
-                      className={`text-base font-bold leading-relaxed transition-all duration-300 sm:text-lg ${activeIndex === index
-                        ? "text-blue-300"
-                        : "text-white"
-                        }`}
+                      className={`text-base font-bold leading-relaxed transition-all duration-300 sm:text-lg ${
+                        activeIndex === index ? "text-blue-300" : "text-white"
+                      }`}
                     >
                       {faq.question}
                     </h3>
@@ -120,10 +122,11 @@ export default function FAQSection() {
 
                 {/* ARROW */}
                 <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ${activeIndex === index
-                    ? "rotate-180 border-blue-500/30 bg-blue-500/10 text-blue-400"
-                    : "border-white/10 bg-white/[0.03] text-gray-400"
-                    }`}
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-all duration-500 ${
+                    activeIndex === index
+                      ? "rotate-180 border-blue-500/30 bg-blue-500/10 text-blue-400"
+                      : "border-white/10 bg-white/[0.03] text-gray-400"
+                  }`}
                 >
                   <ChevronDown className="h-5 w-5" />
                 </div>
@@ -176,9 +179,16 @@ export default function FAQSection() {
               </p>
             </div>
 
-            <button className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.3)]">
+            <button
+              onClick={() =>
+                window.open(
+                  "https://wa.me/7801825312?text=Hello%20ChartMentor%20Team%2C%20I%20need%20support.",
+                  "_blank",
+                )
+              }
+              className="group cursor-pointer inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(59,130,246,0.3)]"
+            >
               CONTACT WHATSAPP SUPPORT
-
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>

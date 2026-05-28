@@ -19,9 +19,6 @@ export const indianUsers = [
     userfive,
     usersix,
     userseven,
-
-
     userten,
-
     usertwelve,
 ];

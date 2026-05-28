@@ -7,8 +7,9 @@ import {
   TrendingDown,
   ShieldCheck,
 } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 const ProblemSolution = () => {
+  const navigate = useNavigate();
   const problems = [
     "YouTube videos increasing your confusion",
     "Expensive courses but no proper guidance",
@@ -38,7 +39,6 @@ const ProblemSolution = () => {
       <div className="absolute bottom-0 right-0 h-[350px] w-[350px] rounded-full bg-blue-600/10 blur-[140px]" />
 
       <div className="relative mx-auto max-w-7xl">
-
         {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -60,13 +60,14 @@ const ProblemSolution = () => {
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-400 sm:text-lg">
-            Learning to trade might seem easy, but without proper guidance, everyone eventually faces confusion, unexpected losses, and inconsistency.
+            Learning to trade might seem easy, but without proper guidance,
+            everyone eventually faces confusion, unexpected losses, and
+            inconsistency.
           </p>
         </motion.div>
 
         {/* MAIN GRID */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
-
           {/* LEFT SIDE - PROBLEMS */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
@@ -176,15 +177,13 @@ const ProblemSolution = () => {
             </div>
 
             {/* CTA */}
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="group mt-10 flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-5 text-sm font-black uppercase tracking-[0.2em] text-white shadow-[0_0_40px_rgba(59,130,246,0.2)] transition-all duration-300 hover:shadow-[0_0_60px_rgba(59,130,246,0.35)]"
+            <button
+              onClick={() => navigate("/login?redirect=/student/dashboard")}
+              className="group mt-10 cursor-pointer flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 px-7 py-4 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[0_10px_40px_rgba(59,130,246,0.25)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_15px_60px_rgba(59,130,246,0.45)] active:scale-[0.98] sm:px-8 sm:py-5 sm:text-sm"
             >
-              Join Mentorship
-
+              Join Membership
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </motion.button>
+            </button>
           </motion.div>
         </div>
       </div>

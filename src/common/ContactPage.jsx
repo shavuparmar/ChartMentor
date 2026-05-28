@@ -21,7 +21,7 @@ export default function ChartMentorContactPage() {
         {
             icon: Phone,
             title: "Help Line",
-            value: "+91 98765 43210",
+            value: "+91 78018 25312 ",
             description: "Available Monday to Saturday for premium members.",
         },
 
