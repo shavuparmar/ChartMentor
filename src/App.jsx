@@ -14,7 +14,7 @@ const TermsandCondition = lazy(() => import("./pages/TermsandCondition.jsx"))
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy.jsx"))
 const Sitemap = lazy(() => import("./pages/Sitemap.jsx"))
 const PaymentStatus = lazy(() => import("./pages/PaymentStatus.jsx"));
-
+const Invalidsite = lazy(() => import("./common/Invalidsite.jsx"))
 
 const AdminLayout = lazy(() => import('./admin/layouts/AdminLayout'));
 const AdminDashboard = lazy(() => import('./admin/pages/AdminDashboard'));
@@ -47,7 +47,8 @@ export default function App() {
             <Toaster position="top-right" />
             <Suspense fallback={<Loader />}>
               <Routes>
-                <Route path="/" element={<LandingPage />} />
+                <Route path="/not-working" element={<LandingPage />} />
+                <Route path="/" element={<Invalidsite />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-and-conditions" element={<TermsandCondition />} />
